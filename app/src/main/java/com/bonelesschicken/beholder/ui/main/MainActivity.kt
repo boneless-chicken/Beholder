@@ -1,11 +1,16 @@
-package com.bonelesschicken.beholder
+package com.bonelesschicken.beholder.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bonelesschicken.beholder.ui.BaseActivity
+import com.bonelesschicken.beholder.data.model.Character
+import com.bonelesschicken.beholder.R
+import com.bonelesschicken.beholder.ui.login.LoginActivity
 import com.google.android.material.appbar.AppBarLayout
 
 class MainActivity : BaseActivity() {
@@ -25,8 +30,10 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(mToolbar)
 
         mRecyclerCharacters = findViewById(R.id.recycler_main_characters)
-        mAdapterCharacters = CharacterListAdapter(this,
-            arrayListOf(Character("Trombadin", "Eneano", 14),
+        mAdapterCharacters = CharacterListAdapter(
+            this,
+            arrayListOf(
+                Character("Trombadin", "Eneano", 14),
                 Character("Gandalf", "Mago", 12),
                 Character("Sauron", "Malo malote", 666),
                 Character("Frodo", "Hobbit", 2),
@@ -35,7 +42,9 @@ class MainActivity : BaseActivity() {
                 Character("Legonas", "Elfo", 89),
                 Character("El Emperador", "Ruco", 66),
                 Character("Fernando", "Maricon", -1),
-                Character("Brian", "Diabetin", 76)))
+                Character("Brian", "Diabetin", 76)
+            )
+        )
 
         mRecyclerCharacters.setHasFixedSize(true)
         mRecyclerCharacters.layoutManager = LinearLayoutManager(this)
@@ -52,6 +61,8 @@ class MainActivity : BaseActivity() {
 
         if (id == R.id.action_dark_theme) {
             alternateTheme()
+        } else if (id == R.id.action_login) {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
         return super.onOptionsItemSelected(item)

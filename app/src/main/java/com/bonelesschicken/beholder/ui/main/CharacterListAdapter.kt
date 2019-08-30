@@ -1,4 +1,4 @@
-package com.bonelesschicken.beholder
+package com.bonelesschicken.beholder.ui.main
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bonelesschicken.beholder.R
+import com.bonelesschicken.beholder.data.model.Character
 
 class CharacterListAdapter(context: Context, private var mCharacterList: List<Character>?)
     : RecyclerView.Adapter<CharacterListAdapter.CharacterViewHolder>() {

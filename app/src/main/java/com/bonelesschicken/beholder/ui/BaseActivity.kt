@@ -1,8 +1,9 @@
-package com.bonelesschicken.beholder
+package com.bonelesschicken.beholder.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.bonelesschicken.beholder.utils.PreferenceManager
 import java.lang.ref.WeakReference
 
 abstract class BaseActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.bonelesschicken.beholder
+package com.bonelesschicken.beholder.utils
 
 import android.content.Context
 import java.lang.ref.WeakReference

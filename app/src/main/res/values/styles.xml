@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
@@ -11,5 +11,18 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
     <style name="AppTheme.AppBarOverlay.Details" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+    <style name="FloatingActionButton.Shape.Dice"
+           parent="ShapeAppearanceOverlay.MaterialComponents.FloatingActionButton">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+
+    <style name="dividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@android:color/darker_gray</item>
+    </style>
 
 </resources>

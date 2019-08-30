@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_login"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_account_circle"
+            android:title="@string/app_name"
+            app:showAsAction="ifRoom" />
+    <item
+            android:id="@+id/action_dark_theme"
+            android:orderInCategory="99"
+            android:icon="@drawable/ic_brightness"
+            android:title="@string/app_name"
+            app:showAsAction="ifRoom" />
+</menu>

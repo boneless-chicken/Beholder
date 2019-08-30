@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#7f0000</color>
     <color name="colorAccent">#f9a825</color>
 
-    <color name="colorTitle">#000000</color>
+    <color name="colorTitle">#FFF</color>
     <color name="colorPrimaryDarkPreLollipop">#7f0000</color>
 </resources>

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bonelesschicken.beholder.ui.BaseActivity
@@ -21,6 +23,8 @@ class MainActivity : BaseActivity() {
     private lateinit var mRecyclerCharacters: RecyclerView
     private lateinit var mAdapterCharacters: CharacterListAdapter
 
+    private lateinit var mainViewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,25 +34,18 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(mToolbar)
 
         mRecyclerCharacters = findViewById(R.id.recycler_main_characters)
-        mAdapterCharacters = CharacterListAdapter(
-            this,
-            arrayListOf(
-                Character("Trombadin", "Eneano", 14),
-                Character("Gandalf", "Mago", 12),
-                Character("Sauron", "Malo malote", 666),
-                Character("Frodo", "Hobbit", 2),
-                Character("Sneaky", "Trapito", 69),
-                Character("Chango", "Primate", 0),
-                Character("Legonas", "Elfo", 89),
-                Character("El Emperador", "Ruco", 66),
-                Character("Fernando", "Maricon", -1),
-                Character("Brian", "Diabetin", 76)
-            )
-        )
+        mAdapterCharacters = CharacterListAdapter(this, ArrayList())
 
         mRecyclerCharacters.setHasFixedSize(true)
         mRecyclerCharacters.layoutManager = LinearLayoutManager(this)
         mRecyclerCharacters.adapter = mAdapterCharacters
+
+        mainViewModel = ViewModelProvider(this, MainViewModelFactory()).get(MainViewModel::class.java)
+
+        mainViewModel.characterList.observe(this@MainActivity, Observer {
+            val characterList = it ?: return@Observer
+            mAdapterCharacters.setData(characterList)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -8,4 +8,8 @@ class CharacterRepository(private val apiClient: ApiClient) {
     fun getCharacterList(): ArrayList<Character> {
         return apiClient.getCharacterList()
     }
+
+    fun getCharacterDetails(characterId: Long): Character? {
+        return apiClient.getCharacterDetail(characterId)
+    }
 }

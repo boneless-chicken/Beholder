@@ -28,7 +28,9 @@ class CharacterListAdapter(private val context: Context, private var mCharacterL
         holder.mTextCharacterClass.text = character.classType
         holder.mTextCharacterLvl.text = character.level.toString()
         holder.mCardCharacter.setOnClickListener {
-            context.startActivity(Intent(context, CharacterActivity::class.java))
+            val intent = Intent(context, CharacterActivity::class.java)
+            intent.putExtra(CharacterActivity.CHARACTER_ID, character.id)
+            context.startActivity(intent)
         }
     }
 

@@ -3,18 +3,24 @@ package com.bonelesschicken.beholder.network
 import com.bonelesschicken.beholder.data.model.Character
 
 class ApiClient {
+    private val characters = arrayListOf(
+        Character(1L, "Trombadin", "Eneano", 14),
+        Character(2L, "Gandalf", "Mago", 12),
+        Character(3L, "Sauron", "Malo malote", 666),
+        Character(4L, "Frodo", "Hobbit", 2),
+        Character(5L, "Sneaky", "Trapito", 69),
+        Character(6L, "Chango", "Primate", 0),
+        Character(7L, "Legonas", "Elfo", 89),
+        Character(8L, "El Emperador", "Ruco", 66),
+        Character(9L, "Fernando", "Maricon", -1),
+        Character(10L,"Brian", "Diabetin", 76)
+    )
+
     fun getCharacterList(): ArrayList<Character> {
-        return arrayListOf(
-            Character("Trombadin", "Eneano", 14),
-            Character("Gandalf", "Mago", 12),
-            Character("Sauron", "Malo malote", 666),
-            Character("Frodo", "Hobbit", 2),
-            Character("Sneaky", "Trapito", 69),
-            Character("Chango", "Primate", 0),
-            Character("Legonas", "Elfo", 89),
-            Character("El Emperador", "Ruco", 66),
-            Character("Fernando", "Maricon", -1),
-            Character("Brian", "Diabetin", 76)
-        )
+        return characters
+    }
+
+    fun getCharacterDetail(characterId: Long): Character? {
+        return characters.firstOrNull { it.id == characterId }
     }
 }

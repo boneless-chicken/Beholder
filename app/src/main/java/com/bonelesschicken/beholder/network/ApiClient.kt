@@ -4,16 +4,16 @@ import com.bonelesschicken.beholder.data.model.Character
 
 class ApiClient {
     private val characters = arrayListOf(
-        Character(1L, "Trombadin", "Eneano", 14),
-        Character(2L, "Gandalf", "Mago", 12),
-        Character(3L, "Sauron", "Malo malote", 666),
-        Character(4L, "Frodo", "Hobbit", 2),
-        Character(5L, "Sneaky", "Trapito", 69),
-        Character(6L, "Chango", "Primate", 0),
-        Character(7L, "Legonas", "Elfo", 89),
-        Character(8L, "El Emperador", "Ruco", 66),
-        Character(9L, "Fernando", "Maricon", -1),
-        Character(10L,"Brian", "Diabetin", 76)
+        Character(1L, "Trombadin", "Eneano", 14, 99),
+        Character(2L, "Gandalf", "Mago", 12, 10),
+        Character(3L, "Sauron", "Malo malote", 666, 92),
+        Character(4L, "Frodo", "Hobbit", 2, 87),
+        Character(5L, "Sneaky", "Trapito", 69, 12),
+        Character(6L, "Chango", "Primate", 0, 87),
+        Character(7L, "Legonas", "Elfo", 89,49),
+        Character(8L, "El Emperador", "Ruco", 66, 14),
+        Character(9L, "Fernando", "Maricon", -1, 33),
+        Character(10L,"Brian", "Diabetin", 76, 79)
     )
 
     fun getCharacterList(): ArrayList<Character> {

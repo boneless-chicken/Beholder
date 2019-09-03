@@ -25,7 +25,7 @@ class CharacterListAdapter(private val context: Context, private var mCharacterL
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = mCharacterList!![position]
         holder.mTextCharacterName.text = character.name
-        holder.mTextCharacterClass.text = character.classType
+        holder.mTextCharacterClass.text = character.className
         holder.mTextCharacterLvl.text = character.level.toString()
         holder.mCardCharacter.setOnClickListener {
             val intent = Intent(context, CharacterActivity::class.java)

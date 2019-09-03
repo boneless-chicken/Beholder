@@ -9,8 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bonelesschicken.beholder.R
 import com.bonelesschicken.beholder.ui.BaseActivity
-import com.bonelesschicken.beholder.ui.main.MainViewModel
-import com.bonelesschicken.beholder.ui.main.MainViewModelFactory
 import com.bonelesschicken.beholder.utils.BottomAppBarCutCornersTopEdge
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -46,10 +44,6 @@ class CharacterActivity : BaseActivity() {
         babBackground.shapeAppearanceModel.topEdge = topEdge
         babBackground.invalidateSelf()
 
-        bar.setNavigationOnClickListener {
-
-        }
-
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
             this, mDrawerLayout, bar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -57,19 +51,24 @@ class CharacterActivity : BaseActivity() {
         toggle.syncState()
 
         mNavigationView = findViewById(R.id.nav_view)
-        val navHeader = mNavigationView.inflateHeaderView(R.layout.nav_header_character)
-        /*val mNavHeaderProfileName = navHeader.findViewById<TextView>(R.id.text_nav_header_title)
-        val mNavHeaderProfileEmail = navHeader.findViewById<TextView>(R.id.text_nav_header_subtitle)
-        if (mNavHeaderProfileName != null && mNavHeaderProfileEmail != null) {
-            mNavHeaderProfileName.text = mSession.session.name
-            mNavHeaderProfileEmail.text = mSession.session.email
-        }*/
+        val mNavHeader = mNavigationView.inflateHeaderView(R.layout.nav_header_character)
+        val mNavCharacterName = mNavHeader.findViewById<TextView>(R.id.text_nav_character_name)
+        val mNavCharacterClass = mNavHeader.findViewById<TextView>(R.id.text_nav_character_class)
+        val mNavCharacterLevel = mNavHeader.findViewById<TextView>(R.id.text_nav_character_level)
+        val mNavCharacterExperience = mNavHeader.findViewById<TextView>(R.id.text_nav_character_xp)
 
         characterViewModel = ViewModelProvider(this, CharacterViewModelFactory()).get(CharacterViewModel::class.java)
 
         if (intent.hasExtra(CHARACTER_ID)) {
             characterViewModel.getCharacterDetail(intent.getLongExtra(CHARACTER_ID, 0L))
                 .observe(this, Observer {
+                    // Nav views
+                    mNavCharacterName.text = it.name
+                    mNavCharacterClass.text = it.className
+                    mNavCharacterLevel.text = applicationContext.getString(R.string.nav_character_level, it.level.toString())
+                    mNavCharacterExperience.text = applicationContext.getString(R.string.nav_character_experience, it.experience.toString())
+
+                    // Main views
                     mTextCharacterName.text = it.name
                 })
         }

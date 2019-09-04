@@ -6,8 +6,8 @@
               android:layout_height="match_parent">
 
     <TextView
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_character_detail_name" tools:text="Character name" android:textSize="30sp"/>
+            android:id="@+id/text_character_detail_name" tools:text="Character name" android:textSize="14sp"/>
 </LinearLayout>

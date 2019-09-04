@@ -64,12 +64,12 @@ class CharacterActivity : BaseActivity() {
                 .observe(this, Observer {
                     // Nav views
                     mNavCharacterName.text = it.name
-                    mNavCharacterClass.text = it.className
+                    mNavCharacterClass.text = it.classes[0].name
                     mNavCharacterLevel.text = applicationContext.getString(R.string.nav_character_level, it.level.toString())
                     mNavCharacterExperience.text = applicationContext.getString(R.string.nav_character_experience, it.experience.toString())
 
                     // Main views
-                    mTextCharacterName.text = it.name
+                    mTextCharacterName.text = it.toString()
                 })
         }
     }

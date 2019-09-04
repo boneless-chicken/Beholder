@@ -3,6 +3,7 @@ package com.bonelesschicken.beholder.data.model
 data class Character(val id: Long,
                      val name: String,
                      val classes: List<CharacterClass>,
+                     val abilities: List<Ability>,
                      val race: Race,
                      val alignment: Alignment,
                      val personalityTraits: String,

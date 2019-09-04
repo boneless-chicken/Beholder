@@ -1,4 +1,20 @@
 package com.bonelesschicken.beholder.data.model
 
-class CharacterClass {
-}
+data class CharacterClass (val name: String,
+                           val description: String,
+                           val hitDie: Dice,
+                           val primaryAbility: Ability,
+                           val proficiencyBonus: Int,
+                           val features: List<Feature>,
+                           val skills: List<Skill>,
+                           val savingThrows: List<Ability>,
+                           val tools: List<Tool>,
+                           val armorProficiencies: List<Armor>,
+                           val weaponProficiencies: List<Weapon>,
+                           val cantripsKnown: Int,
+                           val spellsKnow: Int,
+                           val spellSaveDC: Int,
+                           val spellAttackModifier: Int,
+                           val martialArts: Int,
+                           val kiPoints: Int,
+                           val unarmoredMovement: Int)

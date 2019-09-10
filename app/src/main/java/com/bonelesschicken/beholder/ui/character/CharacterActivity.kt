@@ -41,7 +41,7 @@ class CharacterActivity : BaseActivity() {
             bar.cradleVerticalOffset
         )
         val babBackground = bar.background as MaterialShapeDrawable
-        babBackground.shapeAppearanceModel.topEdge = topEdge
+        babBackground.shapeAppearanceModel = babBackground.shapeAppearanceModel.toBuilder().setTopEdge(topEdge).build()
         babBackground.invalidateSelf()
 
         mDrawerLayout = findViewById(R.id.drawer_layout)

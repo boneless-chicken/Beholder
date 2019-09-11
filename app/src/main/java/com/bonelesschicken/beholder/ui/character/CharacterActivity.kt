@@ -22,7 +22,9 @@ class CharacterActivity : BaseActivity() {
 
     private lateinit var mNavigationView: NavigationView
     private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var mTextCharacterName: TextView
+    //private lateinit var mTextCharacterName: TextView
+    private lateinit var mBottomAppBar: BottomAppBar
+    private lateinit var mFabButton: FloatingActionButton
 
     private lateinit var characterViewModel: CharacterViewModel
 
@@ -30,23 +32,23 @@ class CharacterActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character)
 
-        val bar = findViewById<BottomAppBar>(R.id.bar)
-        val fab2 = findViewById<FloatingActionButton>(R.id.fab)
+        mBottomAppBar = findViewById(R.id.bar)
+        mFabButton = findViewById(R.id.fab)
 
-        mTextCharacterName = findViewById(R.id.text_character_detail_name)
+        //mTextCharacterName = findViewById(R.id.text_character_detail_name)
 
         val topEdge = BottomAppBarCutCornersTopEdge(
-            bar.fabCradleMargin,
-            bar.fabCradleRoundedCornerRadius,
-            bar.cradleVerticalOffset
+            mBottomAppBar.fabCradleMargin,
+            mBottomAppBar.fabCradleRoundedCornerRadius,
+            mBottomAppBar.cradleVerticalOffset
         )
-        val babBackground = bar.background as MaterialShapeDrawable
+        val babBackground = mBottomAppBar.background as MaterialShapeDrawable
         babBackground.shapeAppearanceModel = babBackground.shapeAppearanceModel.toBuilder().setTopEdge(topEdge).build()
         babBackground.invalidateSelf()
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
-            this, mDrawerLayout, bar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+            this, mDrawerLayout, mBottomAppBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         mDrawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -69,7 +71,7 @@ class CharacterActivity : BaseActivity() {
                     mNavCharacterExperience.text = applicationContext.getString(R.string.nav_character_experience, it.experience.toString())
 
                     // Main views
-                    mTextCharacterName.text = it.toString()
+                    //mTextCharacterName.text = it.toString()
                 })
         }
     }

@@ -6,4 +6,6 @@
 
     <color name="colorTitle">#000000</color>
     <color name="colorPrimaryDarkPreLollipop">#7f0000</color>
+
+    <color name="background">##F6F6F6</color>
 </resources>

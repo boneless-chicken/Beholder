@@ -1,4 +1,4 @@
-package com.bonelesschicken.beholder.data
+package com.bonelesschicken.beholder.data.repositories
 
 import com.bonelesschicken.beholder.data.model.Character
 import com.bonelesschicken.beholder.network.ApiClient

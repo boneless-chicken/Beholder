@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1064795222728",
+    "firebase_url": "https://baldurs-e87b9.firebaseio.com",
+    "project_id": "baldurs-e87b9",
+    "storage_bucket": "baldurs-e87b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064795222728:android:1a48795c26b452c9a5abfd",
+        "android_client_info": {
+          "package_name": "com.bonelesschicken.beholder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064795222728-kidhbt2tbf350jred9r398vmr5e4m8qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bonelesschicken.beholder",
+            "certificate_hash": "b78c4684becc10de3d1ef088058d72925977051d"
+          }
+        },
+        {
+          "client_id": "1064795222728-jiqcqnms0dhm2arj2dhtut88mqg3mte5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTP6FLCMxANL-YjFCZXWITx9O7b8CysSE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064795222728-jiqcqnms0dhm2arj2dhtut88mqg3mte5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,13 +10,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bonelesschicken.beholder.ui.BaseActivity
-import com.bonelesschicken.beholder.data.model.Character
 import com.bonelesschicken.beholder.R
 import com.bonelesschicken.beholder.ui.login.LoginActivity
 import com.google.android.material.appbar.AppBarLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import androidx.appcompat.app.AlertDialog
+
 
 class MainActivity : BaseActivity() {
-
     private lateinit var mToolbar: Toolbar
     private lateinit var mAppBar: AppBarLayout
 
@@ -48,6 +50,11 @@ class MainActivity : BaseActivity() {
         })
     }
 
+    override fun onStart() {
+        super.onStart()
+        updateUI(mAuth.currentUser)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
@@ -59,9 +66,34 @@ class MainActivity : BaseActivity() {
         if (id == R.id.action_dark_theme) {
             alternateTheme()
         } else if (id == R.id.action_login) {
-            startActivity(Intent(this, LoginActivity::class.java))
+            if (FirebaseAuth.getInstance().currentUser != null) {
+                showSignOutDialog()
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
         }
 
         return super.onOptionsItemSelected(item)
     }
+
+    override fun updateUI(currentUser: FirebaseUser?) {
+        if (currentUser != null) {
+            mToolbar.title = currentUser.email
+        } else {
+            mToolbar.title = getString(R.string.app_name)
+        }
+    }
+
+    private fun showSignOutDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Logout")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton(android.R.string.yes) { _, _ ->
+                mainViewModel.logout()
+                updateUI(mAuth.currentUser)
+            }
+            .setNegativeButton(android.R.string.no, null)
+            .show()
+    }
+
 }

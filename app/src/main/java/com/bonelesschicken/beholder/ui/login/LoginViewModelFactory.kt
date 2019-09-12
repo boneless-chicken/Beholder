@@ -2,8 +2,8 @@ package com.bonelesschicken.beholder.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.bonelesschicken.beholder.data.LoginDataSource
-import com.bonelesschicken.beholder.data.LoginRepository
+import com.bonelesschicken.beholder.data.source.LoginDataSource
+import com.bonelesschicken.beholder.data.repositories.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

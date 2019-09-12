@@ -14,8 +14,10 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.firebase.auth.FirebaseUser
 
 class CharacterActivity : BaseActivity() {
+
     companion object {
         const val CHARACTER_ID = "CHARACTER_ID"
     }
@@ -82,6 +84,10 @@ class CharacterActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun updateUI(currentUser: FirebaseUser?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

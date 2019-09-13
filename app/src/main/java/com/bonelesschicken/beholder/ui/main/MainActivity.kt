@@ -86,8 +86,8 @@ class MainActivity : BaseActivity() {
 
     private fun showSignOutDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Logout")
-            .setMessage("Are you sure you want to logout?")
+            .setTitle(getString(R.string.action_logout))
+            .setMessage(getString(R.string.action_dialog_sure_to_logout))
             .setPositiveButton(android.R.string.yes) { _, _ ->
                 mainViewModel.logout()
                 updateUI(mAuth.currentUser)

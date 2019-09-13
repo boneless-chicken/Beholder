@@ -16,4 +16,6 @@
     <string name="nav_character_level">Level: %1$s</string>
     <string name="nav_character_experience">Experience: %1$s</string>
     <string name="action_register">Register</string>
+    <string name="action_dialog_sure_to_logout">Are you sure you want to logout?</string>
+    <string name="action_logout">Logout</string>
 </resources>

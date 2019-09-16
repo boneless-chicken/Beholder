@@ -1,11 +1,11 @@
 package com.bonelesschicken.beholder.ui.login
 
-import com.google.firebase.auth.FirebaseUser
+import com.bonelesschicken.beholder.data.model.User
 
 /**
  * Authentication result : success (user details) or error message.
  */
 data class LoginResult(
-    val success: FirebaseUser? = null,
+    val success: User? = null,
     val error: String? = null
 )

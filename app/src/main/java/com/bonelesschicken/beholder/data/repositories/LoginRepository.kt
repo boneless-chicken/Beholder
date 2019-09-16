@@ -1,10 +1,12 @@
 package com.bonelesschicken.beholder.data.repositories
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.bonelesschicken.beholder.data.model.User
-import com.bonelesschicken.beholder.data.source.LoginDataSource
 import com.bonelesschicken.beholder.network.ApiClient
+import com.bonelesschicken.beholder.network.responses.GetCharactersResponse
 import com.bonelesschicken.beholder.ui.login.LoginResult
+import com.bonelesschicken.beholder.utils.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import retrofit2.Call
@@ -17,26 +19,22 @@ import java.io.IOException
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository(val dataSource: LoginDataSource) {
-
-    // in-memory cache of the loggedInUser object
-    var user: FirebaseUser? = null
-        private set
-
-    val isLoggedIn: Boolean
-        get() = user != null
-
-    init {
-        user = null
-    }
-
-    fun logout() {
-        user = null
-        dataSource.logout()
-    }
+class LoginRepository(private val context: Context) {
 
     fun login(username: String, password: String, viewModel: MutableLiveData<LoginResult>) {
-        dataSource.login(username, password, viewModel)
+        try {
+            val auth = FirebaseAuth.getInstance()
+            auth.signInWithEmailAndPassword(username, password)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        auth.currentUser?.let { currentUser -> getUser(currentUser, viewModel) }
+                    } else {
+                        viewModel.value = LoginResult(null, it.exception.toString())
+                    }
+                }
+        } catch (e: Throwable) {
+            viewModel.value = LoginResult(null, IOException("Error logging in", e).message)
+        }
     }
 
     fun register(username: String, password: String, viewModel: MutableLiveData<LoginResult>) {
@@ -45,7 +43,7 @@ class LoginRepository(val dataSource: LoginDataSource) {
             auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        auth.currentUser?.let { it1 -> createUser(it1, viewModel) }
+                        auth.currentUser?.let { currentUser -> createUser(currentUser, viewModel) }
                     } else {
                         viewModel.value = LoginResult(null, it.exception.toString())
                     }
@@ -53,11 +51,41 @@ class LoginRepository(val dataSource: LoginDataSource) {
         } catch (e: Throwable) {
             viewModel.value = LoginResult(null, IOException("Error logging in", e).message)
         }
-        //dataSource.register(username, password, viewModel)
+    }
+
+    private fun getUser(currentUser: FirebaseUser, viewModel: MutableLiveData<LoginResult>) {
+        ApiClient().service.getCharacters(currentUser.uid)
+            .enqueue(object : Callback<GetCharactersResponse> {
+                override fun onFailure(call: Call<GetCharactersResponse>, t: Throwable) {
+                    viewModel.value = LoginResult(null, error = t.toString())
+                }
+
+                override fun onResponse(call: Call<GetCharactersResponse>,
+                                        response: Response<GetCharactersResponse>) {
+                    if (response.isSuccessful) {
+                        val userResponse = response.body()?.user
+                        if (userResponse != null) {
+                            userResponse.email = currentUser.email ?: ""
+                            userResponse.name = currentUser.displayName ?: ""
+                            PreferenceManager.saveSession(userResponse, context)
+                            viewModel.value = LoginResult(userResponse, null)
+                        } else {
+                            FirebaseAuth.getInstance().signOut()
+                            viewModel.value = LoginResult(null, "Null response")
+                        }
+                    } else {
+                        viewModel.value = LoginResult(null, "Not successful response")
+                    }
+                }
+            })
     }
 
     private fun createUser(currentUser: FirebaseUser, viewModel: MutableLiveData<LoginResult>) {
-        ApiClient().service.createUser(User("", uid = currentUser.uid, characterList = arrayListOf()))
+        ApiClient().service.createUser(User("",
+            uid = currentUser.uid,
+            characterList = arrayListOf(),
+            email = (currentUser.email ?: ""),
+            name = (currentUser.displayName ?: "")))
             .enqueue(
                 object : Callback<User> {
                     override fun onFailure(call: Call<User>, t: Throwable) {
@@ -66,9 +94,17 @@ class LoginRepository(val dataSource: LoginDataSource) {
 
                     override fun onResponse(call: Call<User>, response: Response<User>) {
                         if (response.isSuccessful) {
-                            viewModel.value = LoginResult(currentUser, null)
+                            val userResponse = response.body()
+                            if (userResponse != null) {
+                                userResponse.email = currentUser.email ?: ""
+                                userResponse.name = currentUser.displayName ?: ""
+                                PreferenceManager.saveSession(userResponse, context)
+                                viewModel.value = LoginResult(userResponse, null)
+                            } else {
+                                viewModel.value = LoginResult(null, "Null response")
+                            }
                         } else {
-                            viewModel.value = LoginResult(null, IOException("Error logging in").message)
+                            viewModel.value = LoginResult(null, "Not successful response")
                         }
                     }
             })

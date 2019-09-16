@@ -13,9 +13,12 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bonelesschicken.beholder.R
+import com.bonelesschicken.beholder.data.model.User
 import com.bonelesschicken.beholder.ui.BaseActivity
 import com.bonelesschicken.beholder.ui.main.MainActivity
 import com.bonelesschicken.beholder.utils.afterTextChanged
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : BaseActivity() {
@@ -26,13 +29,13 @@ class LoginActivity : BaseActivity() {
 
         setContentView(R.layout.activity_login)
 
-        val username = findViewById<EditText>(R.id.username)
-        val password = findViewById<EditText>(R.id.password)
-        val login = findViewById<Button>(R.id.login)
-        val register = findViewById<Button>(R.id.register)
+        val username = findViewById<TextInputEditText>(R.id.field_user_id)
+        val password = findViewById<TextInputEditText>(R.id.field_password)
+        val login = findViewById<MaterialButton>(R.id.login)
+        val register = findViewById<MaterialButton>(R.id.register)
         val loading = findViewById<ProgressBar>(R.id.loading)
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory()).get(LoginViewModel::class.java)
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(this)).get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -117,7 +120,7 @@ class LoginActivity : BaseActivity() {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
 
-    override fun updateUI(currentUser: FirebaseUser?) {
+    override fun updateUI(currentUser: User?) {
         if (currentUser != null) {
             val welcome = getString(R.string.welcome)
             val displayName = currentUser.email

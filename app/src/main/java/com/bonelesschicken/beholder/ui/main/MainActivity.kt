@@ -16,6 +16,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import androidx.appcompat.app.AlertDialog
+import com.bonelesschicken.beholder.data.model.User
 
 
 class MainActivity : BaseActivity() {
@@ -71,7 +72,7 @@ class MainActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun updateUI(currentUser: FirebaseUser?) {
+    override fun updateUI(currentUser: User?) {
         if (currentUser != null) {
             supportActionBar?.title = currentUser.email
             mainViewModel.getCharacters(currentUser.uid)
@@ -85,7 +86,7 @@ class MainActivity : BaseActivity() {
             .setTitle(getString(R.string.action_logout))
             .setMessage(getString(R.string.action_dialog_sure_to_logout))
             .setPositiveButton(android.R.string.yes) { _, _ ->
-                mainViewModel.logout()
+                mSessionManager.logout()
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }

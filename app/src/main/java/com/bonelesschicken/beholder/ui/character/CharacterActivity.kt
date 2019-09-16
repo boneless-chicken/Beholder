@@ -8,13 +8,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bonelesschicken.beholder.R
+import com.bonelesschicken.beholder.data.model.User
 import com.bonelesschicken.beholder.ui.BaseActivity
 import com.bonelesschicken.beholder.utils.BottomAppBarCutCornersTopEdge
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.firebase.auth.FirebaseUser
 
 class CharacterActivity : BaseActivity() {
 
@@ -88,7 +88,7 @@ class CharacterActivity : BaseActivity() {
         }
     }
 
-    override fun updateUI(currentUser: FirebaseUser?) {
+    override fun updateUI(currentUser: User?) {
         
     }
 

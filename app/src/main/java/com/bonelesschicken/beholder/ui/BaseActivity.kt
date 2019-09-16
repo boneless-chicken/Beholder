@@ -9,28 +9,27 @@ import com.google.firebase.auth.FirebaseAuth
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.bonelesschicken.beholder.data.model.User
+import com.bonelesschicken.beholder.utils.SessionManager
 import com.google.firebase.auth.FirebaseUser
 
 
 abstract class BaseActivity : AppCompatActivity() {
-    private lateinit var mPreferenceManager: PreferenceManager
-    lateinit var mAuth: FirebaseAuth
+    lateinit var mSessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mPreferenceManager = PreferenceManager.getInstance(WeakReference(this))
-        mAuth = FirebaseAuth.getInstance()
+        mSessionManager = SessionManager(this)
         applyTheme()
     }
 
     override fun onStart() {
         super.onStart()
-        updateUI(mAuth.currentUser)
+        updateUI(mSessionManager.user)
     }
 
     private fun applyTheme() {
-        if (mPreferenceManager.loadDarkThemeConfig(this)) {
+        if (PreferenceManager.loadDarkThemeConfig(this)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -38,10 +37,10 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     fun alternateTheme() {
-        val actualTheme = mPreferenceManager.loadDarkThemeConfig(this)
-        mPreferenceManager.saveDarkThemeConfig(!actualTheme, this)
+        val actualTheme = PreferenceManager.loadDarkThemeConfig(this)
+        PreferenceManager.saveDarkThemeConfig(!actualTheme, this)
         applyTheme()
     }
 
-    abstract fun updateUI(currentUser: FirebaseUser?)
+    abstract fun updateUI(currentUser: User?)
 }

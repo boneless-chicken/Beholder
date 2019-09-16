@@ -50,11 +50,6 @@ class MainActivity : BaseActivity() {
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        updateUI(mAuth.currentUser)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
@@ -78,7 +73,7 @@ class MainActivity : BaseActivity() {
 
     override fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
-            mToolbar.title = currentUser.email
+            supportActionBar?.title = currentUser.email
             mainViewModel.getCharacters(currentUser.uid)
         } else {
             mToolbar.title = getString(R.string.app_name)
@@ -91,7 +86,8 @@ class MainActivity : BaseActivity() {
             .setMessage(getString(R.string.action_dialog_sure_to_logout))
             .setPositiveButton(android.R.string.yes) { _, _ ->
                 mainViewModel.logout()
-                updateUI(mAuth.currentUser)
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
             }
             .setNegativeButton(android.R.string.no, null)
             .show()

@@ -1,6 +1,7 @@
 package com.bonelesschicken.beholder.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bonelesschicken.beholder.R
 import com.bonelesschicken.beholder.ui.BaseActivity
+import com.bonelesschicken.beholder.ui.main.MainActivity
 import com.bonelesschicken.beholder.utils.afterTextChanged
 import com.google.firebase.auth.FirebaseUser
 
@@ -55,11 +57,9 @@ class LoginActivity : BaseActivity() {
             }
             if (loginResult.success != null) {
                 updateUI(loginResult.success)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
         })
 
         loginViewModel.registerResult.observe(this@LoginActivity, Observer {
@@ -71,11 +71,9 @@ class LoginActivity : BaseActivity() {
             }
             if (loginResult.success != null) {
                 updateUI(loginResult.success)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
-            setResult(Activity.RESULT_OK)
-
-            //Complete and destroy login activity once successful
-            finish()
         })
 
         username.afterTextChanged {
@@ -120,13 +118,15 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun updateUI(currentUser: FirebaseUser?) {
-        val welcome = getString(R.string.welcome)
-        val displayName = currentUser?.email
-        Toast.makeText(
-            applicationContext,
-            "$welcome $displayName",
-            Toast.LENGTH_LONG
-        ).show()
+        if (currentUser != null) {
+            val welcome = getString(R.string.welcome)
+            val displayName = currentUser.email
+            Toast.makeText(
+                applicationContext,
+                "$welcome $displayName",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 
 }

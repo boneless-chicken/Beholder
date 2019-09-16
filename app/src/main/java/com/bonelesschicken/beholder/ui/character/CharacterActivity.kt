@@ -89,7 +89,7 @@ class CharacterActivity : BaseActivity() {
     }
 
     override fun updateUI(currentUser: FirebaseUser?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        
     }
 
 }

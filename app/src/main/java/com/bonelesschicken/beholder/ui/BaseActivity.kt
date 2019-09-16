@@ -21,8 +21,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
         mPreferenceManager = PreferenceManager.getInstance(WeakReference(this))
         mAuth = FirebaseAuth.getInstance()
-
         applyTheme()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        updateUI(mAuth.currentUser)
     }
 
     private fun applyTheme() {

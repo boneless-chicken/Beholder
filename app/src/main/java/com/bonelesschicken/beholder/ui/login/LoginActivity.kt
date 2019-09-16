@@ -62,6 +62,22 @@ class LoginActivity : BaseActivity() {
             finish()
         })
 
+        loginViewModel.registerResult.observe(this@LoginActivity, Observer {
+            val loginResult = it ?: return@Observer
+
+            loading.visibility = View.GONE
+            if (loginResult.error != null) {
+                showLoginFailed(loginResult.error)
+            }
+            if (loginResult.success != null) {
+                updateUI(loginResult.success)
+            }
+            setResult(Activity.RESULT_OK)
+
+            //Complete and destroy login activity once successful
+            finish()
+        })
+
         username.afterTextChanged {
             loginViewModel.loginDataChanged(
                 username.text.toString(),

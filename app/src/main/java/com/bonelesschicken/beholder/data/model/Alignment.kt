@@ -1,4 +1,3 @@
 package com.bonelesschicken.beholder.data.model
 
-class Alignment {
-}
+data class Alignment(val attitude: String, val morality: String)

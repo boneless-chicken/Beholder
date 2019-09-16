@@ -79,6 +79,7 @@ class MainActivity : BaseActivity() {
     override fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
             mToolbar.title = currentUser.email
+            mainViewModel.getCharacters(currentUser.uid)
         } else {
             mToolbar.title = getString(R.string.app_name)
         }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import com.bonelesschicken.beholder.data.repositories.LoginRepository
-import com.bonelesschicken.beholder.data.Result
 
 import com.bonelesschicken.beholder.R
 
@@ -17,13 +16,16 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
+    private val _registerResult = MutableLiveData<LoginResult>()
+    val registerResult: LiveData<LoginResult> = _registerResult
+
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
         loginRepository.login(username, password, _loginResult)
     }
 
     fun register(username: String, password: String) {
-        loginRepository.register(username, password, _loginResult)
+        loginRepository.register(username, password, _registerResult)
     }
 
     fun loginDataChanged(username: String, password: String) {

@@ -67,10 +67,12 @@ class CharacterActivity : BaseActivity() {
             characterViewModel.getCharacterDetail(intent.getLongExtra(CHARACTER_ID, 0L))
                 .observe(this, Observer {
                     // Nav views
-                    mNavCharacterName.text = it.name
-                    mNavCharacterClass.text = it.classes[0].name
-                    mNavCharacterLevel.text = applicationContext.getString(R.string.nav_character_level, it.level.toString())
-                    mNavCharacterExperience.text = applicationContext.getString(R.string.nav_character_experience, it.experience.toString())
+                    if (it != null) {
+                        mNavCharacterName.text = it.name
+                        mNavCharacterClass.text = it.characterClass
+                        mNavCharacterLevel.text = applicationContext.getString(R.string.nav_character_level, it.level.toString())
+                        mNavCharacterExperience.text = applicationContext.getString(R.string.nav_character_experience, it.experiencePoints.toString())
+                    }
 
                     // Main views
                     //mTextCharacterName.text = it.toString()

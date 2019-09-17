@@ -1,7 +1,10 @@
 package com.bonelesschicken.beholder.data.repositories
 
 import android.content.Context
+import android.os.AsyncTask
 import androidx.lifecycle.MutableLiveData
+import com.bonelesschicken.beholder.data.BeholderDatabase
+import com.bonelesschicken.beholder.data.daos.CharacterDao
 import com.bonelesschicken.beholder.data.model.User
 import com.bonelesschicken.beholder.network.ApiClient
 import com.bonelesschicken.beholder.network.responses.GetCharactersResponse
@@ -20,6 +23,13 @@ import java.io.IOException
  */
 
 class LoginRepository(private val context: Context) {
+    private var db : BeholderDatabase = BeholderDatabase.invoke(context)
+    private var characterDao: CharacterDao
+
+    init {
+        characterDao = db.characterDao()
+    }
+
 
     fun login(username: String, password: String, viewModel: MutableLiveData<LoginResult>) {
         try {
@@ -63,6 +73,12 @@ class LoginRepository(private val context: Context) {
                 override fun onResponse(call: Call<GetCharactersResponse>,
                                         response: Response<GetCharactersResponse>) {
                     if (response.isSuccessful) {
+                        AsyncTask.execute {
+                            response.body()?.characters?.forEach {
+                                characterDao.insertAll(it)
+                            }
+                        }
+
                         val userResponse = response.body()?.user
                         if (userResponse != null) {
                             userResponse.email = currentUser.email ?: ""

@@ -1,3 +1,10 @@
 package com.bonelesschicken.beholder.data.model
 
-data class Alignment(val attitude: String, val morality: String)
+import androidx.room.ColumnInfo
+
+data class Alignment(
+    @ColumnInfo(name = "attitude")
+    val attitude: String,
+
+    @ColumnInfo(name = "morality")
+    val morality: String)

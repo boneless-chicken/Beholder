@@ -7,10 +7,8 @@ import com.bonelesschicken.beholder.data.repositories.CharacterRepository
 import com.bonelesschicken.beholder.data.model.Character
 
 class CharacterViewModel(private val characterRepository: CharacterRepository): ViewModel() {
-    private val _characterDetail = MutableLiveData<Character>()
 
-    fun getCharacterDetail(characterId: Long): LiveData<Character> {
-        _characterDetail.value = characterRepository.getCharacterDetails(characterId)
-        return _characterDetail
+    fun getCharacterDetail(characterId: String): LiveData<Character> {
+        return characterRepository.getCharacterDetails(characterId)
     }
 }

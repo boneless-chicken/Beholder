@@ -23,49 +23,49 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:id="@+id/textView45"
+                    android:id="@+id/text_character_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
-                    android:text="Trombadin"
                     android:textColor="@color/colorTitle"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView51"
+                    app:layout_constraintEnd_toStartOf="@+id/text_character_background"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Trombadin" />
 
             <TextView
-                    android:id="@+id/textView49"
+                    android:id="@+id/text_character_race"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
-                    android:text="Dwarf"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView45" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_character_name"
+                    tools:text="Dwarf" />
 
             <TextView
-                    android:id="@+id/textView50"
+                    android:id="@+id/text_character_alignment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Lawful neutral"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Lawful neutral" />
 
             <TextView
-                    android:id="@+id/textView51"
+                    android:id="@+id/text_character_background"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="Noble"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView45"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_character_name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView45"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toTopOf="@+id/text_character_name"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:text="Noble" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -87,84 +87,84 @@
                 android:layout_height="match_parent">
 
             <TextView
-                    android:id="@+id/textView46"
+                    android:id="@+id/text_character_class"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="4dp"
-                    android:text="Cleric"
                     android:textColor="@color/colorTitle"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView47"
+                    app:layout_constraintEnd_toStartOf="@+id/text_character_level"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Cleric" />
 
             <TextView
-                    android:id="@+id/textView48"
+                    android:id="@+id/text_character_exp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Experience: 369"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="Experience: 369" />
 
             <TextView
-                    android:id="@+id/textView47"
+                    android:id="@+id/text_character_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="Level: 12"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView46"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_character_class"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView46"
-                    app:layout_constraintVertical_bias="1.0" />
+                    app:layout_constraintTop_toTopOf="@+id/text_character_class"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:text="Level: 12" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <include
-            android:id="@+id/materialCardView7"
+            android:id="@+id/card_character_armor"
             layout="@layout/item_generic_card"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/materialCardView10"
+            app:layout_constraintEnd_toStartOf="@+id/card_character_initiative"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView11" />
 
     <include
-            android:id="@+id/materialCardView10"
+            android:id="@+id/card_character_initiative"
             layout="@layout/item_generic_card"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/materialCardView8"
+            app:layout_constraintEnd_toStartOf="@+id/card_character_speed"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/materialCardView7"
+            app:layout_constraintStart_toEndOf="@+id/card_character_armor"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView11" />
 
     <include
-            android:id="@+id/materialCardView8"
+            android:id="@+id/card_character_speed"
             layout="@layout/item_generic_card"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/materialCardView9"
+            app:layout_constraintEnd_toStartOf="@+id/card_character_proficiency"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/materialCardView10"
+            app:layout_constraintStart_toEndOf="@+id/card_character_initiative"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView11" />
 
     <include
-            android:id="@+id/materialCardView9"
+            android:id="@+id/card_character_proficiency"
             layout="@layout/item_generic_card"
             android:layout_width="0dp"
             android:layout_height="100dp"
@@ -173,7 +173,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/materialCardView8"
+            app:layout_constraintStart_toEndOf="@+id/card_character_speed"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView11" />
 
     <include
@@ -187,7 +187,7 @@
             app:layout_constraintEnd_toStartOf="@+id/card_character_dexterity"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView7" />
+            app:layout_constraintTop_toBottomOf="@+id/card_character_armor" />
 
     <include
             android:id="@+id/card_character_dexterity"
@@ -200,7 +200,7 @@
             app:layout_constraintEnd_toStartOf="@+id/card_character_constitution"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/card_character_strength"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView7" />
+            app:layout_constraintTop_toBottomOf="@+id/card_character_armor" />
 
     <include
             android:id="@+id/card_character_constitution"
@@ -213,7 +213,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/card_character_dexterity"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView7" />
+            app:layout_constraintTop_toBottomOf="@+id/card_character_armor" />
 
     <include
             android:id="@+id/card_character_intelligence"

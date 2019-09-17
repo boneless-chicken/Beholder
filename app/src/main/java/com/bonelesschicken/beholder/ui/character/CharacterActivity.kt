@@ -1,6 +1,7 @@
 package com.bonelesschicken.beholder.ui.character
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -23,10 +24,19 @@ class CharacterActivity : BaseActivity() {
     }
 
     private lateinit var mNavigationView: NavigationView
+    private lateinit var mNavigationHeader: View
+
     private lateinit var mDrawerLayout: DrawerLayout
-    //private lateinit var mTextCharacterName: TextView
     private lateinit var mBottomAppBar: BottomAppBar
     private lateinit var mFabButton: FloatingActionButton
+
+    private lateinit var mTextCharacterName: TextView
+    private lateinit var mTextCharacterRace: TextView
+    private lateinit var mTextCharacterAlignment: TextView
+    private lateinit var mTextCharacterBackground: TextView
+    private lateinit var mTextCharacterClass: TextView
+    private lateinit var mTextCharacterExp: TextView
+    private lateinit var mTextCharacterLvl: TextView
 
     private lateinit var characterViewModel: CharacterViewModel
 
@@ -36,8 +46,6 @@ class CharacterActivity : BaseActivity() {
 
         mBottomAppBar = findViewById(R.id.bar)
         mFabButton = findViewById(R.id.fab)
-
-        //mTextCharacterName = findViewById(R.id.text_character_detail_name)
 
         val topEdge = BottomAppBarCutCornersTopEdge(
             mBottomAppBar.fabCradleMargin,
@@ -55,27 +63,31 @@ class CharacterActivity : BaseActivity() {
         toggle.syncState()
 
         mNavigationView = findViewById(R.id.nav_view)
-        val mNavHeader = mNavigationView.inflateHeaderView(R.layout.nav_header_character)
-        val mNavCharacterName = mNavHeader.findViewById<TextView>(R.id.text_nav_character_name)
-        val mNavCharacterClass = mNavHeader.findViewById<TextView>(R.id.text_nav_character_class)
-        val mNavCharacterLevel = mNavHeader.findViewById<TextView>(R.id.text_nav_character_level)
-        val mNavCharacterExperience = mNavHeader.findViewById<TextView>(R.id.text_nav_character_xp)
+        mNavigationHeader = mNavigationView.inflateHeaderView(R.layout.nav_header_character)
 
-        characterViewModel = ViewModelProvider(this, CharacterViewModelFactory()).get(CharacterViewModel::class.java)
+        // Views
+        mTextCharacterName = findViewById(R.id.text_character_name)
+        mTextCharacterRace = findViewById(R.id.text_character_race)
+        mTextCharacterAlignment = findViewById(R.id.text_character_alignment)
+        mTextCharacterBackground = findViewById(R.id.text_character_background)
+        mTextCharacterClass = findViewById(R.id.text_character_class)
+        mTextCharacterExp = findViewById(R.id.text_character_exp)
+        mTextCharacterLvl = findViewById(R.id.text_character_level)
+
+        characterViewModel = ViewModelProvider(this, CharacterViewModelFactory(this)).get(CharacterViewModel::class.java)
 
         if (intent.hasExtra(CHARACTER_ID)) {
-            characterViewModel.getCharacterDetail(intent.getLongExtra(CHARACTER_ID, 0L))
+            characterViewModel.getCharacterDetail(intent.getStringExtra(CHARACTER_ID))
                 .observe(this, Observer {
-                    // Nav views
-                    if (it != null) {
-                        mNavCharacterName.text = it.name
-                        mNavCharacterClass.text = it.characterClass
-                        mNavCharacterLevel.text = applicationContext.getString(R.string.nav_character_level, it.level.toString())
-                        mNavCharacterExperience.text = applicationContext.getString(R.string.nav_character_experience, it.experiencePoints.toString())
-                    }
-
                     // Main views
-                    //mTextCharacterName.text = it.toString()
+                    mTextCharacterName.text = it.name
+                    mTextCharacterRace.text = it.race
+                    val alignment = "${it.alignment.attitude} ${it.alignment.morality}"
+                    mTextCharacterAlignment.text = alignment
+                    mTextCharacterBackground.text = it.background
+                    mTextCharacterClass.text = it.characterClass
+                    mTextCharacterExp.text = it.experiencePoints.toString()
+                    mTextCharacterLvl.text = it.level.toString()
                 })
         }
     }
@@ -89,7 +101,12 @@ class CharacterActivity : BaseActivity() {
     }
 
     override fun updateUI(currentUser: User?) {
-        
+        if (currentUser != null) {
+            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_name).text = currentUser.email
+            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_class).text = currentUser.name
+            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_level).text = currentUser.uid
+            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_xp).text = currentUser.id
+        }
     }
 
 }

@@ -43,7 +43,7 @@ class MainActivity : BaseActivity() {
         mRecyclerCharacters.layoutManager = LinearLayoutManager(this)
         mRecyclerCharacters.adapter = mAdapterCharacters
 
-        mainViewModel = ViewModelProvider(this, MainViewModelFactory()).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
 
         mainViewModel.characterList.observe(this@MainActivity, Observer {
             val characterList = it ?: return@Observer
@@ -75,7 +75,6 @@ class MainActivity : BaseActivity() {
     override fun updateUI(currentUser: User?) {
         if (currentUser != null) {
             supportActionBar?.title = currentUser.email
-            mainViewModel.getCharacters(currentUser.uid)
         } else {
             mToolbar.title = getString(R.string.app_name)
         }

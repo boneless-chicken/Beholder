@@ -1,5 +1,6 @@
 package com.bonelesschicken.beholder.network
 
+import com.bonelesschicken.beholder.data.model.PrimaryStats
 import com.bonelesschicken.beholder.data.model.User
 import com.bonelesschicken.beholder.network.responses.GetCharactersResponse
 import retrofit2.Call
@@ -12,6 +13,9 @@ interface SpellbinderService {
 
     @GET("/characters/{uid}")
     fun getCharacters(@Path("uid") uid: String): Call<GetCharactersResponse>
+
+    @GET("/characters/primaryStats/{id}")
+    fun getPrimaryStats(@Path("id") id: String): Call<PrimaryStats>
 
     @POST("/CreateUser")
     fun createUser(@Body user: User): Call<User>

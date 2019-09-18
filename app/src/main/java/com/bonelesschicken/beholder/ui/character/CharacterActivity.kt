@@ -77,17 +77,24 @@ class CharacterActivity : BaseActivity() {
         characterViewModel = ViewModelProvider(this, CharacterViewModelFactory(this)).get(CharacterViewModel::class.java)
 
         if (intent.hasExtra(CHARACTER_ID)) {
-            characterViewModel.getCharacterDetail(intent.getStringExtra(CHARACTER_ID))
-                .observe(this, Observer {
+            characterViewModel.getCharacter(intent.getStringExtra(CHARACTER_ID))
+                .observe(this, Observer { character ->
                     // Main views
-                    mTextCharacterName.text = it.name
-                    mTextCharacterRace.text = it.race
-                    val alignment = "${it.alignment.attitude} ${it.alignment.morality}"
+                    mTextCharacterName.text = character.name
+                    mTextCharacterRace.text = character.race
+                    val alignment = "${character.alignment.attitude} ${character.alignment.morality}"
                     mTextCharacterAlignment.text = alignment
-                    mTextCharacterBackground.text = it.background
-                    mTextCharacterClass.text = it.characterClass
-                    mTextCharacterExp.text = it.experiencePoints.toString()
-                    mTextCharacterLvl.text = it.level.toString()
+                    mTextCharacterBackground.text = character.background
+                    mTextCharacterClass.text = character.characterClass
+                    mTextCharacterExp.text = character.experiencePoints.toString()
+                    mTextCharacterLvl.text = character.level.toString()
+
+                    characterViewModel.getCharacterPrimaryStats(character.primaryStats)
+                        .observe(this, Observer { primaryStats ->
+                            if (primaryStats != null) {
+                                // Set views with primary information
+                            }
+                        })
                 })
         }
     }

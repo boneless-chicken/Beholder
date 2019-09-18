@@ -16,7 +16,7 @@ interface CharacterDao {
     fun getById(id: String): LiveData<Character>
 
     @Delete
-    fun delete(todo: Character)
+    fun delete(character: Character)
 
     @Update
     fun updateTodo(vararg characters: Character)

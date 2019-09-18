@@ -31,4 +31,7 @@ data class Character(
     val level: Int,
 
     @ColumnInfo(name = "experiencePoints")
-    val experiencePoints: Int)
+    val experiencePoints: Int,
+
+    @ColumnInfo(name = "primaryStats")
+    val primaryStats: String)

@@ -11,10 +11,10 @@ import retrofit2.http.Path
 
 interface SpellbinderService {
 
-    @GET("/characters/{uid}")
+    @GET("/Characters/{uid}")
     fun getCharacters(@Path("uid") uid: String): Call<GetCharactersResponse>
 
-    @GET("/characters/primaryStats/{id}")
+    @GET("/Characters/PrimaryStats/{id}")
     fun getPrimaryStats(@Path("id") id: String): Call<PrimaryStats>
 
     @POST("/CreateUser")

@@ -41,7 +41,7 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
                 if (response.isSuccessful && response.body() != null) {
                     val primaryStats = response.body()
                     if (primaryStats != null) {
-                        insertPrimaryStats(primaryStats)
+                        upsertPrimaryStats(primaryStats)
                     }
                 }
             }
@@ -50,9 +50,12 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
         return primaryStatsDao.getById(primaryStatsId)
     }
 
-    private fun insertPrimaryStats(primaryStats: PrimaryStats) {
+    private fun upsertPrimaryStats(primaryStats: PrimaryStats) {
         AsyncTask.execute {
-            primaryStatsDao.insertAll(primaryStats)
+            val id = primaryStatsDao.insert(primaryStats)
+            if (id == -1L) {
+                primaryStatsDao.update(primaryStats)
+            }
         }
     }
 }

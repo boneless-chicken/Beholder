@@ -5,6 +5,7 @@ import android.os.AsyncTask
 import androidx.lifecycle.MutableLiveData
 import com.bonelesschicken.beholder.data.BeholderDatabase
 import com.bonelesschicken.beholder.data.daos.CharacterDao
+import com.bonelesschicken.beholder.data.model.Character
 import com.bonelesschicken.beholder.data.model.User
 import com.bonelesschicken.beholder.network.ApiClient
 import com.bonelesschicken.beholder.network.responses.GetCharactersResponse
@@ -75,7 +76,7 @@ class LoginRepository(private val context: Context) {
                     if (response.isSuccessful) {
                         AsyncTask.execute {
                             response.body()?.characters?.forEach {
-                                characterDao.insertAll(it)
+                                upsertCharacter(it)
                             }
                         }
 
@@ -124,5 +125,12 @@ class LoginRepository(private val context: Context) {
                         }
                     }
             })
+    }
+
+    private fun upsertCharacter(character: Character) {
+        val id = characterDao.insert(character)
+        if (id == -1L) {
+            characterDao.update(character)
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.bonelesschicken.beholder.ui.character
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -57,30 +59,7 @@ class CharacterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character)
-
-        mBottomAppBar = findViewById(R.id.bottom_bar_character)
-        mFabButton = findViewById(R.id.fab_button_character)
-
-        mBottomAppBar.setOnMenuItemClickListener { item ->
-            val id = item.itemId
-            if (id == R.id.action_level_up) {
-                Toast.makeText(this, "Level up", Toast.LENGTH_SHORT).show()
-                return@setOnMenuItemClickListener (true)
-            } else if (id == R.id.action_rest) {
-                Toast.makeText(this, "Rest", Toast.LENGTH_SHORT).show()
-                return@setOnMenuItemClickListener (true)
-            }
-            super.onOptionsItemSelected(item)
-        }
-
-        val topEdge = BottomAppBarCutCornersTopEdge(
-            mBottomAppBar.fabCradleMargin,
-            mBottomAppBar.fabCradleRoundedCornerRadius,
-            mBottomAppBar.cradleVerticalOffset
-        )
-        val babBackground = mBottomAppBar.background as MaterialShapeDrawable
-        babBackground.shapeAppearanceModel = babBackground.shapeAppearanceModel.toBuilder().setTopEdge(topEdge).build()
-        babBackground.invalidateSelf()
+        setupBottomAppBar()
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
@@ -194,13 +173,49 @@ class CharacterActivity : BaseActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.character_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item?.itemId
+        if (id == R.id.action_level_up) {
+            Toast.makeText(this, "Level up", Toast.LENGTH_SHORT).show()
+            return true
+        } else if (id == R.id.action_rest) {
+            Toast.makeText(this, "Rest", Toast.LENGTH_SHORT).show()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun updateUI(currentUser: User?) {
         if (currentUser != null) {
             mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_name).text = currentUser.email
             mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_class).text = currentUser.name
-            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_level).text = currentUser.uid
-            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_xp).text = currentUser.id
+            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_level).text = ""
+            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_xp).text = ""
         }
+    }
+
+    private fun setupBottomAppBar() {
+        mBottomAppBar = findViewById(R.id.bottom_bar_character)
+        mFabButton = findViewById(R.id.fab_button_character)
+        setSupportActionBar(mBottomAppBar)
+
+        mBottomAppBar.setNavigationOnClickListener {
+            Toast.makeText(this, "Nav clicked", Toast.LENGTH_SHORT).show()
+        }
+
+        val topEdge = BottomAppBarCutCornersTopEdge(
+            mBottomAppBar.fabCradleMargin,
+            mBottomAppBar.fabCradleRoundedCornerRadius,
+            mBottomAppBar.cradleVerticalOffset
+        )
+        val babBackground = mBottomAppBar.background as MaterialShapeDrawable
+        babBackground.shapeAppearanceModel = babBackground.shapeAppearanceModel.toBuilder().setTopEdge(topEdge).build()
+        babBackground.invalidateSelf()
     }
 
     private fun setPrimaryScoreViewValues(scoreView: View, scoreName: String, scoreValue: Int?) {

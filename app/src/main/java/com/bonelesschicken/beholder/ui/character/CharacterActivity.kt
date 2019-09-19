@@ -38,6 +38,7 @@ class CharacterActivity : BaseActivity() {
     private lateinit var mTextCharacterClass: TextView
     private lateinit var mTextCharacterExp: TextView
     private lateinit var mTextCharacterLvl: TextView
+    private lateinit var mTextCharacterHp: TextView
 
     private lateinit var mArmorClassView: View
     private lateinit var mInitiativeViewView: View
@@ -86,6 +87,7 @@ class CharacterActivity : BaseActivity() {
         mTextCharacterClass = findViewById(R.id.text_character_class)
         mTextCharacterExp = findViewById(R.id.text_character_exp)
         mTextCharacterLvl = findViewById(R.id.text_character_level)
+        mTextCharacterHp = findViewById(R.id.text_character_hp)
 
         // Primary scores views
         mArmorClassView = findViewById(R.id.card_character_armor)
@@ -120,6 +122,10 @@ class CharacterActivity : BaseActivity() {
                         .observe(this, Observer { primaryStats ->
                             if (primaryStats != null) {
                                 // Set views with primary information
+                                mTextCharacterHp.text = applicationContext.getString(R.string.nav_character_hp,
+                                    primaryStats.temporaryHitPoints.toString(),
+                                    primaryStats.hitPoints.toString())
+
                                 setPrimaryScoreViewValues(mArmorClassView,"Armor Class", primaryStats.armorClass)
                                 setPrimaryScoreViewValues(mInitiativeViewView,"Initiative", primaryStats.initiative)
                                 setPrimaryScoreViewValues(mSpeedView,"Speed", primaryStats.speed)

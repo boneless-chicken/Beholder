@@ -18,4 +18,6 @@
     <string name="action_register">Register</string>
     <string name="action_dialog_sure_to_logout">Are you sure you want to logout?</string>
     <string name="action_logout">Logout</string>
+    <string name="label_modifier_short">Mod.</string>
+    <string name="label_passive_check_short">P. Check</string>
 </resources>

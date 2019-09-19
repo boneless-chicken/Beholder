@@ -10,7 +10,7 @@
     <!-- Other components and views -->
 
     <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
+            android:id="@+id/bottom_bar_character"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -19,12 +19,12 @@
             app:navigationIcon="@drawable/ic_menu"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fab_button_character"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_looks_6"
             app:backgroundTint="@color/colorAccent"
-            app:layout_anchor="@id/bar"
+            app:layout_anchor="@id/bottom_bar_character"
             app:shapeAppearanceOverlay="@style/FloatingActionButton.Shape.Dice"/>
 
     <include layout="@layout/content_character" />

@@ -1,6 +1,7 @@
 package com.bonelesschicken.beholder.ui.character
 
 import android.os.Bundle
+import android.telephony.CellSignalStrength
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -38,14 +39,26 @@ class CharacterActivity : BaseActivity() {
     private lateinit var mTextCharacterExp: TextView
     private lateinit var mTextCharacterLvl: TextView
 
+    private lateinit var mArmorClassView: View
+    private lateinit var mInitiativeViewView: View
+    private lateinit var mSpeedView: View
+    private lateinit var mProficiencyView: View
+
+    private lateinit var mStrengthView: View
+    private lateinit var mDexterityView: View
+    private lateinit var mConstitutionView: View
+    private lateinit var mIntelligenceView: View
+    private lateinit var mWisdomView: View
+    private lateinit var mCharismaView: View
+
     private lateinit var characterViewModel: CharacterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character)
 
-        mBottomAppBar = findViewById(R.id.bar)
-        mFabButton = findViewById(R.id.fab)
+        mBottomAppBar = findViewById(R.id.bottom_bar_character)
+        mFabButton = findViewById(R.id.fab_button_character)
 
         val topEdge = BottomAppBarCutCornersTopEdge(
             mBottomAppBar.fabCradleMargin,
@@ -65,7 +78,7 @@ class CharacterActivity : BaseActivity() {
         mNavigationView = findViewById(R.id.nav_view)
         mNavigationHeader = mNavigationView.inflateHeaderView(R.layout.nav_header_character)
 
-        // Views
+        // Character main views
         mTextCharacterName = findViewById(R.id.text_character_name)
         mTextCharacterRace = findViewById(R.id.text_character_race)
         mTextCharacterAlignment = findViewById(R.id.text_character_alignment)
@@ -73,6 +86,20 @@ class CharacterActivity : BaseActivity() {
         mTextCharacterClass = findViewById(R.id.text_character_class)
         mTextCharacterExp = findViewById(R.id.text_character_exp)
         mTextCharacterLvl = findViewById(R.id.text_character_level)
+
+        // Primary scores views
+        mArmorClassView = findViewById(R.id.card_character_armor)
+        mInitiativeViewView = findViewById(R.id.card_character_initiative)
+        mSpeedView = findViewById(R.id.card_character_speed)
+        mProficiencyView = findViewById(R.id.card_character_proficiency)
+
+        // Abilities views
+        mStrengthView = findViewById(R.id.card_character_strength)
+        mDexterityView = findViewById(R.id.card_character_dexterity)
+        mConstitutionView = findViewById(R.id.card_character_constitution)
+        mIntelligenceView = findViewById(R.id.card_character_intelligence)
+        mWisdomView = findViewById(R.id.card_character_wisdom)
+        mCharismaView = findViewById(R.id.card_character_charisma)
 
         characterViewModel = ViewModelProvider(this, CharacterViewModelFactory(this)).get(CharacterViewModel::class.java)
 
@@ -86,13 +113,55 @@ class CharacterActivity : BaseActivity() {
                     mTextCharacterAlignment.text = alignment
                     mTextCharacterBackground.text = character.background
                     mTextCharacterClass.text = character.characterClass
-                    mTextCharacterExp.text = character.experiencePoints.toString()
-                    mTextCharacterLvl.text = character.level.toString()
+                    mTextCharacterExp.text = applicationContext.getString(R.string.nav_character_experience, character.experiencePoints.toString())
+                    mTextCharacterLvl.text = applicationContext.getString(R.string.nav_character_level, character.level.toString())
 
                     characterViewModel.getCharacterPrimaryStats(character.primaryStats)
                         .observe(this, Observer { primaryStats ->
                             if (primaryStats != null) {
                                 // Set views with primary information
+                                setPrimaryScoreViewValues(mArmorClassView,"Armor Class", primaryStats.armorClass)
+                                setPrimaryScoreViewValues(mInitiativeViewView,"Initiative", primaryStats.initiative)
+                                setPrimaryScoreViewValues(mSpeedView,"Speed", primaryStats.speed)
+                                setPrimaryScoreViewValues(mProficiencyView,"Proficiency", primaryStats.proficiencyBonus)
+
+                                // region ability views
+                                setAbilityViewValues(mStrengthView,
+                                    "Strength",
+                                    primaryStats.abilities.strength.abilityScore,
+                                    primaryStats.abilities.strength.abilityModifier,
+                                    primaryStats.abilities.strength.passiveCheck)
+
+                                setAbilityViewValues(mDexterityView,
+                                    "Dexterity",
+                                    primaryStats.abilities.dexterity.abilityScore,
+                                    primaryStats.abilities.dexterity.abilityModifier,
+                                    primaryStats.abilities.dexterity.passiveCheck)
+
+                                setAbilityViewValues(mConstitutionView,
+                                    "Constitution",
+                                    primaryStats.abilities.constitution.abilityScore,
+                                    primaryStats.abilities.constitution.abilityModifier,
+                                    primaryStats.abilities.constitution.passiveCheck)
+
+                                setAbilityViewValues(mIntelligenceView,
+                                    "Intelligence",
+                                    primaryStats.abilities.intelligence.abilityScore,
+                                    primaryStats.abilities.intelligence.abilityModifier,
+                                    primaryStats.abilities.intelligence.passiveCheck)
+
+                                setAbilityViewValues(mWisdomView,
+                                    "Wisdom",
+                                    primaryStats.abilities.wisdom.abilityScore,
+                                    primaryStats.abilities.wisdom.abilityModifier,
+                                    primaryStats.abilities.wisdom.passiveCheck)
+
+                                setAbilityViewValues(mCharismaView,
+                                    "Charisma",
+                                    primaryStats.abilities.charisma.abilityScore,
+                                    primaryStats.abilities.charisma.abilityModifier,
+                                    primaryStats.abilities.charisma.passiveCheck)
+                                //endregion
                             }
                         })
                 })
@@ -116,4 +185,15 @@ class CharacterActivity : BaseActivity() {
         }
     }
 
+    private fun setPrimaryScoreViewValues(scoreView: View, scoreName: String, scoreValue: Int) {
+        scoreView.findViewById<TextView>(R.id.text_generic_card_title).text = scoreName
+        scoreView.findViewById<TextView>(R.id.text_generic_card_value).text = scoreValue.toString()
+    }
+
+    private fun setAbilityViewValues(abilityView: View, abilityName: String, abilityScore: Int, abilityModifier: Int, abilitySave: Int) {
+        abilityView.findViewById<TextView>(R.id.text_character_ability_name).text = abilityName
+        abilityView.findViewById<TextView>(R.id.text_character_ability_score).text = abilityScore.toString()
+        abilityView.findViewById<TextView>(R.id.text_character_mod_score).text = abilityModifier.toString()
+        abilityView.findViewById<TextView>(R.id.text_character_check_score).text = abilitySave.toString()
+    }
 }

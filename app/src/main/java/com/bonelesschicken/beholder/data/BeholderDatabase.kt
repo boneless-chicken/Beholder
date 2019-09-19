@@ -6,15 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.bonelesschicken.beholder.data.daos.CharacterDao
 import com.bonelesschicken.beholder.data.daos.PrimaryStatsDao
+import com.bonelesschicken.beholder.data.daos.TemporaryHitPointsDao
 import com.bonelesschicken.beholder.data.model.Character
 import com.bonelesschicken.beholder.data.model.PrimaryStats
+import com.bonelesschicken.beholder.data.model.TemporaryHitPoints
 
 
-@Database(entities = [Character::class, PrimaryStats::class],
+@Database(entities = [Character::class, PrimaryStats::class, TemporaryHitPoints::class],
     version = 1)
 abstract class BeholderDatabase : RoomDatabase() {
     abstract fun characterDao(): CharacterDao
     abstract fun primaryStatsDao(): PrimaryStatsDao
+    abstract fun temporaryHitPointsDao(): TemporaryHitPointsDao
 
     companion object {
         @Volatile private var instance: BeholderDatabase? = null

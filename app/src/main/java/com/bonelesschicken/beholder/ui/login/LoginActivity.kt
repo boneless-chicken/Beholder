@@ -19,6 +19,7 @@ import com.bonelesschicken.beholder.ui.main.MainActivity
 import com.bonelesschicken.beholder.utils.afterTextChanged
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseUser
 
 class LoginActivity : BaseActivity() {
@@ -29,6 +30,8 @@ class LoginActivity : BaseActivity() {
 
         setContentView(R.layout.activity_login)
 
+        val usernameLayout = findViewById<TextInputLayout>(R.id.username)
+        val passwordLayout = findViewById<TextInputLayout>(R.id.password)
         val username = findViewById<TextInputEditText>(R.id.field_user_id)
         val password = findViewById<TextInputEditText>(R.id.field_password)
         val login = findViewById<MaterialButton>(R.id.login)
@@ -44,10 +47,18 @@ class LoginActivity : BaseActivity() {
             login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
-                username.error = getString(loginState.usernameError)
+                usernameLayout.error = getString(loginState.usernameError)
+                passwordLayout.isErrorEnabled = true
+            } else {
+                usernameLayout.error = ""
+                passwordLayout.isErrorEnabled = false
             }
             if (loginState.passwordError != null) {
-                password.error = getString(loginState.passwordError)
+                passwordLayout.error = getString(loginState.passwordError)
+                passwordLayout.isErrorEnabled = true
+            } else {
+                passwordLayout.error = ""
+                passwordLayout.isErrorEnabled = false
             }
         })
 

@@ -17,8 +17,8 @@ data class PrimaryStats(
     @ColumnInfo(name = "proficiencyBonus")
     val proficiencyBonus: Int,
 
-    @ColumnInfo(name = "hitPoints")
-    val hitPoints: Int,
+    @Embedded
+    val hitPoints: HitPoints,
 
     @Embedded
     val hitDice: HitDice,

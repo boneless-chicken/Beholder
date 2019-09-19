@@ -6,8 +6,11 @@ import androidx.lifecycle.LiveData
 import com.bonelesschicken.beholder.data.BeholderDatabase
 import com.bonelesschicken.beholder.data.daos.CharacterDao
 import com.bonelesschicken.beholder.data.daos.PrimaryStatsDao
+import com.bonelesschicken.beholder.data.daos.TemporaryHitPointsDao
 import com.bonelesschicken.beholder.data.model.Character
 import com.bonelesschicken.beholder.data.model.PrimaryStats
+import com.bonelesschicken.beholder.data.model.PrimaryStatsRelation
+import com.bonelesschicken.beholder.data.model.TemporaryHitPoints
 import com.bonelesschicken.beholder.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,10 +20,12 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
     private var db : BeholderDatabase = BeholderDatabase.invoke(context)
     private var characterDao: CharacterDao
     private var primaryStatsDao: PrimaryStatsDao
+    private var temporaryHitPointsDao: TemporaryHitPointsDao
 
     init {
         characterDao = db.characterDao()
         primaryStatsDao = db.primaryStatsDao()
+        temporaryHitPointsDao = db.temporaryHitPointsDao()
     }
 
     fun getCharacterList(): LiveData<List<Character>> {
@@ -31,7 +36,7 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
         return characterDao.getById(characterId)
     }
 
-    fun getCharacterPrimaryStats(primaryStatsId: String): LiveData<PrimaryStats> {
+    fun getCharacterPrimaryStats(primaryStatsId: String): LiveData<PrimaryStatsRelation> {
         apiClient.service.getPrimaryStats(primaryStatsId).enqueue(object : Callback<PrimaryStats> {
             override fun onFailure(call: Call<PrimaryStats>, t: Throwable) {
 
@@ -42,6 +47,10 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
                     val primaryStats = response.body()
                     if (primaryStats != null) {
                         upsertPrimaryStats(primaryStats)
+                        primaryStats.hitPoints.temporaryHitPoints.forEach {
+                            it.primaryStatsId = primaryStats.id
+                            upsertTemporaryHitPoints(it)
+                        }
                     }
                 }
             }
@@ -55,6 +64,16 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
             val id = primaryStatsDao.insert(primaryStats)
             if (id == -1L) {
                 primaryStatsDao.update(primaryStats)
+            }
+            temporaryHitPointsDao.deleteAllByPrimaryStatsId(primaryStats.id)
+        }
+    }
+
+    private fun upsertTemporaryHitPoints(temporaryHitPoints: TemporaryHitPoints) {
+        AsyncTask.execute {
+            val id = temporaryHitPointsDao.insert(temporaryHitPoints)
+            if (id == -1L) {
+                temporaryHitPointsDao.update(temporaryHitPoints)
             }
         }
     }

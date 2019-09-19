@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_level_up"
+            android:checkable="false"
+            android:orderInCategory="3"
+            android:title="Level Up"
+            android:icon="@drawable/ic_plus_one"
+            app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/action_rest"
+            android:checkable="false"
+            android:orderInCategory="4"
+            android:title="Rest"
+            android:icon="@drawable/ic_bed"
+            app:showAsAction="ifRoom" />
+</menu>

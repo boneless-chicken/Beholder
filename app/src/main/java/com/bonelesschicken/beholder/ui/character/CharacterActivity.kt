@@ -1,9 +1,9 @@
 package com.bonelesschicken.beholder.ui.character
 
 import android.os.Bundle
-import android.telephony.CellSignalStrength
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -60,6 +60,18 @@ class CharacterActivity : BaseActivity() {
 
         mBottomAppBar = findViewById(R.id.bottom_bar_character)
         mFabButton = findViewById(R.id.fab_button_character)
+
+        mBottomAppBar.setOnMenuItemClickListener { item ->
+            val id = item.itemId
+            if (id == R.id.action_level_up) {
+                Toast.makeText(this, "Level up", Toast.LENGTH_SHORT).show()
+                return@setOnMenuItemClickListener (true)
+            } else if (id == R.id.action_rest) {
+                Toast.makeText(this, "Rest", Toast.LENGTH_SHORT).show()
+                return@setOnMenuItemClickListener (true)
+            }
+            super.onOptionsItemSelected(item)
+        }
 
         val topEdge = BottomAppBarCutCornersTopEdge(
             mBottomAppBar.fabCradleMargin,
@@ -119,54 +131,54 @@ class CharacterActivity : BaseActivity() {
                     mTextCharacterLvl.text = applicationContext.getString(R.string.nav_character_level, character.level.toString())
 
                     characterViewModel.getCharacterPrimaryStats(character.primaryStats)
-                        .observe(this, Observer { primaryStats ->
-                            if (primaryStats != null) {
+                        .observe(this, Observer { relation ->
+                            if (relation != null) {
                                 // Set views with primary information
                                 mTextCharacterHp.text = applicationContext.getString(R.string.nav_character_hp,
-                                    primaryStats.temporaryHitPoints.toString(),
-                                    primaryStats.hitPoints.toString())
+                                    relation.primaryStats?.hitPoints?.currentHitPoints.toString(),
+                                    relation.primaryStats?.hitPoints?.totalHitPoints.toString())
 
-                                setPrimaryScoreViewValues(mArmorClassView,"Armor Class", primaryStats.armorClass)
-                                setPrimaryScoreViewValues(mInitiativeViewView,"Initiative", primaryStats.initiative)
-                                setPrimaryScoreViewValues(mSpeedView,"Speed", primaryStats.speed)
-                                setPrimaryScoreViewValues(mProficiencyView,"Proficiency", primaryStats.proficiencyBonus)
+                                setPrimaryScoreViewValues(mArmorClassView,"Armor Class", relation.primaryStats?.armorClass)
+                                setPrimaryScoreViewValues(mInitiativeViewView,"Initiative", relation.primaryStats?.initiative)
+                                setPrimaryScoreViewValues(mSpeedView,"Speed", relation.primaryStats?.speed)
+                                setPrimaryScoreViewValues(mProficiencyView,"Proficiency", relation.primaryStats?.proficiencyBonus)
 
                                 // region ability views
                                 setAbilityViewValues(mStrengthView,
                                     "Strength",
-                                    primaryStats.abilities.strength.abilityScore,
-                                    primaryStats.abilities.strength.abilityModifier,
-                                    primaryStats.abilities.strength.passiveCheck)
+                                    relation.primaryStats?.abilities?.strength?.abilityScore,
+                                    relation.primaryStats?.abilities?.strength?.abilityModifier,
+                                    relation.primaryStats?.abilities?.strength?.passiveCheck)
 
                                 setAbilityViewValues(mDexterityView,
                                     "Dexterity",
-                                    primaryStats.abilities.dexterity.abilityScore,
-                                    primaryStats.abilities.dexterity.abilityModifier,
-                                    primaryStats.abilities.dexterity.passiveCheck)
+                                    relation.primaryStats?.abilities?.dexterity?.abilityScore,
+                                    relation.primaryStats?.abilities?.dexterity?.abilityModifier,
+                                    relation.primaryStats?.abilities?.dexterity?.passiveCheck)
 
                                 setAbilityViewValues(mConstitutionView,
                                     "Constitution",
-                                    primaryStats.abilities.constitution.abilityScore,
-                                    primaryStats.abilities.constitution.abilityModifier,
-                                    primaryStats.abilities.constitution.passiveCheck)
+                                    relation.primaryStats?.abilities?.constitution?.abilityScore,
+                                    relation.primaryStats?.abilities?.constitution?.abilityModifier,
+                                    relation.primaryStats?.abilities?.constitution?.passiveCheck)
 
                                 setAbilityViewValues(mIntelligenceView,
                                     "Intelligence",
-                                    primaryStats.abilities.intelligence.abilityScore,
-                                    primaryStats.abilities.intelligence.abilityModifier,
-                                    primaryStats.abilities.intelligence.passiveCheck)
+                                    relation.primaryStats?.abilities?.intelligence?.abilityScore,
+                                    relation.primaryStats?.abilities?.intelligence?.abilityModifier,
+                                    relation.primaryStats?.abilities?.intelligence?.passiveCheck)
 
                                 setAbilityViewValues(mWisdomView,
                                     "Wisdom",
-                                    primaryStats.abilities.wisdom.abilityScore,
-                                    primaryStats.abilities.wisdom.abilityModifier,
-                                    primaryStats.abilities.wisdom.passiveCheck)
+                                    relation.primaryStats?.abilities?.wisdom?.abilityScore,
+                                    relation.primaryStats?.abilities?.wisdom?.abilityModifier,
+                                    relation.primaryStats?.abilities?.wisdom?.passiveCheck)
 
                                 setAbilityViewValues(mCharismaView,
                                     "Charisma",
-                                    primaryStats.abilities.charisma.abilityScore,
-                                    primaryStats.abilities.charisma.abilityModifier,
-                                    primaryStats.abilities.charisma.passiveCheck)
+                                    relation.primaryStats?.abilities?.charisma?.abilityScore,
+                                    relation.primaryStats?.abilities?.charisma?.abilityModifier,
+                                    relation.primaryStats?.abilities?.charisma?.passiveCheck)
                                 //endregion
                             }
                         })
@@ -191,12 +203,12 @@ class CharacterActivity : BaseActivity() {
         }
     }
 
-    private fun setPrimaryScoreViewValues(scoreView: View, scoreName: String, scoreValue: Int) {
+    private fun setPrimaryScoreViewValues(scoreView: View, scoreName: String, scoreValue: Int?) {
         scoreView.findViewById<TextView>(R.id.text_generic_card_title).text = scoreName
         scoreView.findViewById<TextView>(R.id.text_generic_card_value).text = scoreValue.toString()
     }
 
-    private fun setAbilityViewValues(abilityView: View, abilityName: String, abilityScore: Int, abilityModifier: Int, abilitySave: Int) {
+    private fun setAbilityViewValues(abilityView: View, abilityName: String, abilityScore: Int?, abilityModifier: Int?, abilitySave: Int?) {
         abilityView.findViewById<TextView>(R.id.text_character_ability_name).text = abilityName
         abilityView.findViewById<TextView>(R.id.text_character_ability_score).text = abilityScore.toString()
         abilityView.findViewById<TextView>(R.id.text_character_mod_score).text = abilityModifier.toString()

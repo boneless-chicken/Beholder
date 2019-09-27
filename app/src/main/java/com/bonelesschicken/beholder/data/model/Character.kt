@@ -11,27 +11,30 @@ data class Character(
     @PrimaryKey(autoGenerate = false)
     val id: String,
 
-    @ColumnInfo(name = "name")
-    val name: String,
-
-    @ColumnInfo(name = "race")
-    val race: String,
-
     @ColumnInfo(name = "characterClass")
-    @SerializedName("class")
-    val characterClass: String,
+    @SerializedName("characterInfo")
+    val characterInfo: String,
 
-    @ColumnInfo(name = "background")
-    val background: String,
+    @ColumnInfo(name = "characterStats")
+    @SerializedName("characterStats")
+    val characterStats: String,
 
-    @Embedded
-    val alignment: Alignment,
+    @ColumnInfo(name = "combatStats")
+    @SerializedName("combatStats")
+    val combatStats: String,
 
-    @ColumnInfo(name = "level")
-    val level: Int,
+    @ColumnInfo(name = "mastery")
+    @SerializedName("mastery")
+    val mastery: String,
 
-    @ColumnInfo(name = "experiencePoints")
-    val experiencePoints: Int,
+    @ColumnInfo(name = "inventory")
+    @SerializedName("inventory")
+    val inventory: String,
 
-    @ColumnInfo(name = "primaryStats")
-    val primaryStats: String)
+    @ColumnInfo(name = "characterSpells")
+    @SerializedName("characterSpells")
+    val characterSpells: String,
+
+    @ColumnInfo(name = "backgrounds")
+    @SerializedName("backgrounds")
+    val backgrounds: String)

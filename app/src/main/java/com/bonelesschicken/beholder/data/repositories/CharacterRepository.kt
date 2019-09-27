@@ -5,11 +5,11 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.bonelesschicken.beholder.data.BeholderDatabase
 import com.bonelesschicken.beholder.data.daos.CharacterDao
-import com.bonelesschicken.beholder.data.daos.PrimaryStatsDao
+import com.bonelesschicken.beholder.data.daos.CharacterStatsDao
 import com.bonelesschicken.beholder.data.daos.TemporaryHitPointsDao
 import com.bonelesschicken.beholder.data.model.Character
-import com.bonelesschicken.beholder.data.model.PrimaryStats
-import com.bonelesschicken.beholder.data.model.PrimaryStatsRelation
+import com.bonelesschicken.beholder.data.model.CharacterStats
+import com.bonelesschicken.beholder.data.model.CharacterStatsRelation
 import com.bonelesschicken.beholder.data.model.TemporaryHitPoints
 import com.bonelesschicken.beholder.network.ApiClient
 import retrofit2.Call
@@ -19,12 +19,12 @@ import retrofit2.Response
 class CharacterRepository(context: Context, private val apiClient: ApiClient) {
     private var db : BeholderDatabase = BeholderDatabase.invoke(context)
     private var characterDao: CharacterDao
-    private var primaryStatsDao: PrimaryStatsDao
+    private var characterStatsDao: CharacterStatsDao
     private var temporaryHitPointsDao: TemporaryHitPointsDao
 
     init {
         characterDao = db.characterDao()
-        primaryStatsDao = db.primaryStatsDao()
+        characterStatsDao = db.characterStatsDao()
         temporaryHitPointsDao = db.temporaryHitPointsDao()
     }
 
@@ -36,13 +36,13 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
         return characterDao.getById(characterId)
     }
 
-    fun getCharacterPrimaryStats(primaryStatsId: String): LiveData<PrimaryStatsRelation> {
-        apiClient.service.getPrimaryStats(primaryStatsId).enqueue(object : Callback<PrimaryStats> {
-            override fun onFailure(call: Call<PrimaryStats>, t: Throwable) {
+    fun getCharacterPrimaryStats(primaryStatsId: String): LiveData<CharacterStatsRelation> {
+        apiClient.service.getPrimaryStats(primaryStatsId).enqueue(object : Callback<CharacterStats> {
+            override fun onFailure(call: Call<CharacterStats>, t: Throwable) {
 
             }
 
-            override fun onResponse(call: Call<PrimaryStats>, response: Response<PrimaryStats>) {
+            override fun onResponse(call: Call<CharacterStats>, response: Response<CharacterStats>) {
                 if (response.isSuccessful && response.body() != null) {
                     val primaryStats = response.body()
                     if (primaryStats != null) {
@@ -56,16 +56,16 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
             }
 
         })
-        return primaryStatsDao.getById(primaryStatsId)
+        return characterStatsDao.getById(primaryStatsId)
     }
 
-    private fun upsertPrimaryStats(primaryStats: PrimaryStats) {
+    private fun upsertPrimaryStats(characterStats: CharacterStats) {
         AsyncTask.execute {
-            val id = primaryStatsDao.insert(primaryStats)
+            val id = characterStatsDao.insert(characterStats)
             if (id == -1L) {
-                primaryStatsDao.update(primaryStats)
+                characterStatsDao.update(characterStats)
             }
-            temporaryHitPointsDao.deleteAllByPrimaryStatsId(primaryStats.id)
+            temporaryHitPointsDao.deleteAllByPrimaryStatsId(characterStats.id)
         }
     }
 

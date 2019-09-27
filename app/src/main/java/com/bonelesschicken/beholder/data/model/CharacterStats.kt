@@ -6,8 +6,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.bonelesschicken.beholder.data.model.abilities.Abilities
 
-@Entity(tableName = "primary_stats")
-data class PrimaryStats(
+@Entity(tableName = "character_stats")
+data class CharacterStats(
     @PrimaryKey(autoGenerate = false)
     val id: String,
 
@@ -22,9 +22,6 @@ data class PrimaryStats(
 
     @Embedded
     val hitDice: HitDice,
-
-    @ColumnInfo(name = "temporaryHitPoints")
-    val temporaryHitPoints: Int,
 
     @ColumnInfo(name = "armorClass")
     val armorClass: Int,

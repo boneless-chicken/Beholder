@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Entity(tableName = "temporary_hit_points",
     indices = [Index("primaryStatsId")],
-    foreignKeys = [ForeignKey(entity = PrimaryStats::class,
+    foreignKeys = [ForeignKey(entity = CharacterStats::class,
         parentColumns = ["id"],
         childColumns = ["primaryStatsId"],
         onDelete = ForeignKey.CASCADE

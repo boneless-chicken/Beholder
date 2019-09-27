@@ -100,64 +100,64 @@ class CharacterActivity : BaseActivity() {
             characterViewModel.getCharacter(intent.getStringExtra(CHARACTER_ID))
                 .observe(this, Observer { character ->
                     // Main views
-                    mTextCharacterName.text = character.name
-                    mTextCharacterRace.text = character.race
-                    val alignment = "${character.alignment.attitude} ${character.alignment.morality}"
+                    mTextCharacterName.text = "OZOKING"
+                    mTextCharacterRace.text = "Oso mayor"
+                    val alignment = "Triston Mamalon"
                     mTextCharacterAlignment.text = alignment
-                    mTextCharacterBackground.text = character.background
-                    mTextCharacterClass.text = character.characterClass
-                    mTextCharacterExp.text = applicationContext.getString(R.string.nav_character_experience, character.experiencePoints.toString())
-                    mTextCharacterLvl.text = applicationContext.getString(R.string.nav_character_level, character.level.toString())
+                    mTextCharacterBackground.text = "Soldado del amor"
+                    mTextCharacterClass.text = "ANIMAL"
+                    mTextCharacterExp.text = applicationContext.getString(R.string.nav_character_experience, "13")
+                    mTextCharacterLvl.text = applicationContext.getString(R.string.nav_character_level, "14")
 
-                    characterViewModel.getCharacterPrimaryStats(character.primaryStats)
+                    characterViewModel.getCharacterPrimaryStats(character.characterStats)
                         .observe(this, Observer { relation ->
                             if (relation != null) {
                                 // Set views with primary information
                                 mTextCharacterHp.text = applicationContext.getString(R.string.nav_character_hp,
-                                    relation.primaryStats?.hitPoints?.currentHitPoints.toString(),
-                                    relation.primaryStats?.hitPoints?.totalHitPoints.toString())
+                                    relation.characterStats?.hitPoints?.currentHitPoints.toString(),
+                                    relation.characterStats?.hitPoints?.totalHitPoints.toString())
 
-                                setPrimaryScoreViewValues(mArmorClassView,"Armor Class", relation.primaryStats?.armorClass)
-                                setPrimaryScoreViewValues(mInitiativeViewView,"Initiative", relation.primaryStats?.initiative)
-                                setPrimaryScoreViewValues(mSpeedView,"Speed", relation.primaryStats?.speed)
-                                setPrimaryScoreViewValues(mProficiencyView,"Proficiency", relation.primaryStats?.proficiencyBonus)
+                                setPrimaryScoreViewValues(mArmorClassView,"Armor Class", relation.characterStats?.armorClass)
+                                setPrimaryScoreViewValues(mInitiativeViewView,"Initiative", relation.characterStats?.initiative)
+                                setPrimaryScoreViewValues(mSpeedView,"Speed", relation.characterStats?.speed)
+                                setPrimaryScoreViewValues(mProficiencyView,"Proficiency", relation.characterStats?.proficiencyBonus)
 
                                 // region ability views
                                 setAbilityViewValues(mStrengthView,
                                     "Strength",
-                                    relation.primaryStats?.abilities?.strength?.abilityScore,
-                                    relation.primaryStats?.abilities?.strength?.abilityModifier,
-                                    relation.primaryStats?.abilities?.strength?.passiveCheck)
+                                    relation.characterStats?.abilities?.strength?.abilityScore,
+                                    relation.characterStats?.abilities?.strength?.abilityModifier,
+                                    relation.characterStats?.abilities?.strength?.passiveCheck)
 
                                 setAbilityViewValues(mDexterityView,
                                     "Dexterity",
-                                    relation.primaryStats?.abilities?.dexterity?.abilityScore,
-                                    relation.primaryStats?.abilities?.dexterity?.abilityModifier,
-                                    relation.primaryStats?.abilities?.dexterity?.passiveCheck)
+                                    relation.characterStats?.abilities?.dexterity?.abilityScore,
+                                    relation.characterStats?.abilities?.dexterity?.abilityModifier,
+                                    relation.characterStats?.abilities?.dexterity?.passiveCheck)
 
                                 setAbilityViewValues(mConstitutionView,
                                     "Constitution",
-                                    relation.primaryStats?.abilities?.constitution?.abilityScore,
-                                    relation.primaryStats?.abilities?.constitution?.abilityModifier,
-                                    relation.primaryStats?.abilities?.constitution?.passiveCheck)
+                                    relation.characterStats?.abilities?.constitution?.abilityScore,
+                                    relation.characterStats?.abilities?.constitution?.abilityModifier,
+                                    relation.characterStats?.abilities?.constitution?.passiveCheck)
 
                                 setAbilityViewValues(mIntelligenceView,
                                     "Intelligence",
-                                    relation.primaryStats?.abilities?.intelligence?.abilityScore,
-                                    relation.primaryStats?.abilities?.intelligence?.abilityModifier,
-                                    relation.primaryStats?.abilities?.intelligence?.passiveCheck)
+                                    relation.characterStats?.abilities?.intelligence?.abilityScore,
+                                    relation.characterStats?.abilities?.intelligence?.abilityModifier,
+                                    relation.characterStats?.abilities?.intelligence?.passiveCheck)
 
                                 setAbilityViewValues(mWisdomView,
                                     "Wisdom",
-                                    relation.primaryStats?.abilities?.wisdom?.abilityScore,
-                                    relation.primaryStats?.abilities?.wisdom?.abilityModifier,
-                                    relation.primaryStats?.abilities?.wisdom?.passiveCheck)
+                                    relation.characterStats?.abilities?.wisdom?.abilityScore,
+                                    relation.characterStats?.abilities?.wisdom?.abilityModifier,
+                                    relation.characterStats?.abilities?.wisdom?.passiveCheck)
 
                                 setAbilityViewValues(mCharismaView,
                                     "Charisma",
-                                    relation.primaryStats?.abilities?.charisma?.abilityScore,
-                                    relation.primaryStats?.abilities?.charisma?.abilityModifier,
-                                    relation.primaryStats?.abilities?.charisma?.passiveCheck)
+                                    relation.characterStats?.abilities?.charisma?.abilityScore,
+                                    relation.characterStats?.abilities?.charisma?.abilityModifier,
+                                    relation.characterStats?.abilities?.charisma?.passiveCheck)
                                 //endregion
                             }
                         })

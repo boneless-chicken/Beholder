@@ -21,4 +21,14 @@
     <string name="action_logout">Logout</string>
     <string name="label_modifier_short">Mod.</string>
     <string name="label_passive_check_short">P. Check</string>
+
+    <string-array name="dice_arrays">
+        <item>D20</item>
+        <item>D4</item>
+        <item>D6</item>
+        <item>86</item>
+        <item>D10</item>
+        <item>D12</item>
+        <item>D100</item>
+    </string-array>
 </resources>

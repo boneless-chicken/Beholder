@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class ApiClient {
-    private val baseUrl = "http://104.197.134.210/"
+    private val baseUrl = "http://35.193.19.247/"
 
     private val gson = GsonBuilder()
         .create()

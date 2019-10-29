@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import com.bonelesschicken.beholder.R
 import com.bonelesschicken.beholder.data.model.User
 import com.bonelesschicken.beholder.ui.BaseActivity
 import com.bonelesschicken.beholder.utils.BottomAppBarCutCornersTopEdge
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -28,6 +30,9 @@ class CharacterActivity : BaseActivity() {
 
     private lateinit var mNavigationView: NavigationView
     private lateinit var mNavigationHeader: View
+
+    private lateinit var mAppBarLayout: AppBarLayout
+    private lateinit var mToolbar : Toolbar
 
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var mBottomAppBar: BottomAppBar
@@ -60,6 +65,9 @@ class CharacterActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character)
         setupBottomAppBar()
+
+        mAppBarLayout = findViewById(R.id.character_app_bar)
+        mToolbar = findViewById(R.id.character_toolbar)
 
         mDrawerLayout = findViewById(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
@@ -99,6 +107,7 @@ class CharacterActivity : BaseActivity() {
         if (intent.hasExtra(CHARACTER_ID)) {
             characterViewModel.getCharacter(intent.getStringExtra(CHARACTER_ID))
                 .observe(this, Observer { character ->
+                    mToolbar.title = "OZOKING"
                     // Main views
                     mTextCharacterName.text = "OZOKING"
                     mTextCharacterRace.text = "Oso mayor"

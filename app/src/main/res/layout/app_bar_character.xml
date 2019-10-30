@@ -64,14 +64,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!--<androidx.viewpager.widget.ViewPager
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:id="@+id/character_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-    </androidx.viewpager.widget.ViewPager>-->
-
     <include layout="@layout/content_character" />
 
     <com.google.android.material.bottomappbar.BottomAppBar

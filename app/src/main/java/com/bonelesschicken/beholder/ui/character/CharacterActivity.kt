@@ -81,8 +81,8 @@ class CharacterActivity : BaseActivity() {
             mTabLayout.setupWithViewPager(mViewPager)
             characterViewModel.getCharacter(intent.getStringExtra(CHARACTER_ID))
                 .observe(this, Observer {
-                    mTextCharacterName.text = "OZOKING"
-                    mTextCharacterRace.text = "Oso mayor"
+                    mTextCharacterName.text = it.characterInfo.name
+                    mTextCharacterRace.text = it.characterInfo.race
                 })
         }
     }

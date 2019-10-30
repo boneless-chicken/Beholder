@@ -45,10 +45,11 @@ class MainActivity : BaseActivity() {
 
         mainViewModel = ViewModelProvider(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
 
-        mainViewModel.characterList.observe(this@MainActivity, Observer {
-            val characterList = it ?: return@Observer
-            mAdapterCharacters.setData(characterList)
-        })
+        mainViewModel.getCharacters(mSessionManager.user!!.uid)
+            .observe(this@MainActivity, Observer {
+                val characterList = it ?: return@Observer
+                mAdapterCharacters.setData(characterList)
+            })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

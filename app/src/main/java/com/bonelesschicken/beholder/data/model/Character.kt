@@ -11,13 +11,13 @@ data class Character(
     @PrimaryKey(autoGenerate = false)
     val id: String,
 
-    @ColumnInfo(name = "characterClass")
+    @Embedded
     @SerializedName("characterInfo")
-    val characterInfo: String,
+    val characterInfo: CharacterInfo,
 
-    @ColumnInfo(name = "characterStats")
+    @Embedded
     @SerializedName("characterStats")
-    val characterStats: String,
+    val characterStats: CharacterStats,
 
     @ColumnInfo(name = "combatStats")
     @SerializedName("combatStats")
@@ -31,9 +31,9 @@ data class Character(
     @SerializedName("inventory")
     val inventory: String,
 
-    @ColumnInfo(name = "characterSpells")
+    @Embedded
     @SerializedName("characterSpells")
-    val characterSpells: String,
+    val characterSpells: CharacterSpells,
 
     @ColumnInfo(name = "backgrounds")
     @SerializedName("backgrounds")

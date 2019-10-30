@@ -76,65 +76,71 @@ class PrimaryCharacterFragment : Fragment() {
             characterViewModel.getCharacter(arguments!!.getString("KEY_CHARACTER_ID")!!)
                 .observe(this, Observer { character ->
                     // Main views
-                    val alignment = "Triston Mamalon"
+                    val alignment = character.characterInfo.alignment.attitude + " " + character.characterInfo.alignment.morality
                     mTextCharacterAlignment.text = alignment
-                    mTextCharacterBackground.text = "Soldado del amor"
-                    mTextCharacterClass.text = "ANIMAL"
-                    mTextCharacterExp.text = it.getString(R.string.nav_character_experience, "13")
-                    mTextCharacterLvl.text = it.getString(R.string.nav_character_level, "14")
+                    mTextCharacterBackground.text = character.backgrounds
+                    mTextCharacterClass.text = character.characterInfo.className
+                    mTextCharacterExp.text = it.getString(R.string.nav_character_experience, character.characterInfo.experiencePoints.toString())
+                    mTextCharacterLvl.text = it.getString(R.string.nav_character_level, character.characterInfo.level.toString())
 
-                    characterViewModel.getCharacterPrimaryStats(character.characterStats)
-                        .observe(this, Observer { relation ->
-                            if (relation != null) {
-                                // Set views with primary information
-                                mTextCharacterHp.text = it.getString(R.string.nav_character_hp,
-                                    relation.characterStats?.hitPoints?.currentHitPoints.toString(),
-                                    relation.characterStats?.hitPoints?.totalHitPoints.toString())
+                    mTextCharacterHp.text = it.getString(R.string.nav_character_hp,
+                        character.characterStats.hitPoints.currentHitPoints.toString(),
+                        character.characterStats.hitPoints.totalHitPoints.toString())
 
-                                setPrimaryScoreViewValues(mArmorClassView,"Armor Class", relation.characterStats?.armorClass)
-                                setPrimaryScoreViewValues(mInitiativeViewView,"Initiative", relation.characterStats?.initiative)
-                                setPrimaryScoreViewValues(mSpeedView,"Speed", relation.characterStats?.speed)
-                                setPrimaryScoreViewValues(mProficiencyView,"Proficiency", relation.characterStats?.proficiencyBonus)
+                    setPrimaryScoreViewValues(mArmorClassView,"Armor Class",
+                        character.characterStats.armorClass
+                    )
+                    setPrimaryScoreViewValues(mInitiativeViewView,"Initiative",
+                        character.characterStats.initiative
+                    )
+                    setPrimaryScoreViewValues(mSpeedView,"Speed", character.characterStats.speed)
+                    setPrimaryScoreViewValues(mProficiencyView,"Proficiency",
+                        character.characterStats.proficiencyBonus
+                    )
 
-                                // region ability views
-                                setAbilityViewValues(mStrengthView,
-                                    "Strength",
-                                    relation.characterStats?.abilities?.strength?.abilityScore,
-                                    relation.characterStats?.abilities?.strength?.abilityModifier,
-                                    relation.characterStats?.abilities?.strength?.passiveCheck)
+                    // region ability views
+                    setAbilityViewValues(mStrengthView,
+                        "Strength",
+                        character.characterStats.abilities.strength.abilityScore,
+                        character.characterStats.abilities.strength.abilityModifier,
+                        character.characterStats.abilities.strength.passiveCheck
+                    )
 
-                                setAbilityViewValues(mDexterityView,
-                                    "Dexterity",
-                                    relation.characterStats?.abilities?.dexterity?.abilityScore,
-                                    relation.characterStats?.abilities?.dexterity?.abilityModifier,
-                                    relation.characterStats?.abilities?.dexterity?.passiveCheck)
+                    setAbilityViewValues(mDexterityView,
+                        "Dexterity",
+                        character.characterStats.abilities.dexterity.abilityScore,
+                        character.characterStats.abilities.dexterity.abilityModifier,
+                        character.characterStats.abilities.dexterity.passiveCheck
+                    )
 
-                                setAbilityViewValues(mConstitutionView,
-                                    "Constitution",
-                                    relation.characterStats?.abilities?.constitution?.abilityScore,
-                                    relation.characterStats?.abilities?.constitution?.abilityModifier,
-                                    relation.characterStats?.abilities?.constitution?.passiveCheck)
+                    setAbilityViewValues(mConstitutionView,
+                        "Constitution",
+                        character.characterStats.abilities.constitution.abilityScore,
+                        character.characterStats.abilities.constitution.abilityModifier,
+                        character.characterStats.abilities.constitution.passiveCheck
+                    )
 
-                                setAbilityViewValues(mIntelligenceView,
-                                    "Intelligence",
-                                    relation.characterStats?.abilities?.intelligence?.abilityScore,
-                                    relation.characterStats?.abilities?.intelligence?.abilityModifier,
-                                    relation.characterStats?.abilities?.intelligence?.passiveCheck)
+                    setAbilityViewValues(mIntelligenceView,
+                        "Intelligence",
+                        character.characterStats.abilities.intelligence.abilityScore,
+                        character.characterStats.abilities.intelligence.abilityModifier,
+                        character.characterStats.abilities.intelligence.passiveCheck
+                    )
 
-                                setAbilityViewValues(mWisdomView,
-                                    "Wisdom",
-                                    relation.characterStats?.abilities?.wisdom?.abilityScore,
-                                    relation.characterStats?.abilities?.wisdom?.abilityModifier,
-                                    relation.characterStats?.abilities?.wisdom?.passiveCheck)
+                    setAbilityViewValues(mWisdomView,
+                        "Wisdom",
+                        character.characterStats.abilities.wisdom.abilityScore,
+                        character.characterStats.abilities.wisdom.abilityModifier,
+                        character.characterStats.abilities.wisdom.passiveCheck
+                    )
 
-                                setAbilityViewValues(mCharismaView,
-                                    "Charisma",
-                                    relation.characterStats?.abilities?.charisma?.abilityScore,
-                                    relation.characterStats?.abilities?.charisma?.abilityModifier,
-                                    relation.characterStats?.abilities?.charisma?.passiveCheck)
-                                //endregion
-                            }
-                        })
+                    setAbilityViewValues(mCharismaView,
+                        "Charisma",
+                        character.characterStats.abilities.charisma.abilityScore,
+                        character.characterStats.abilities.charisma.abilityModifier,
+                        character.characterStats.abilities.charisma.passiveCheck
+                    )
+                    //endregion
                 })
         }
     }

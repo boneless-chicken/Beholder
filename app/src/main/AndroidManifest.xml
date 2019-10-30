@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+            android:allowBackup="false"
             android:name=".BeholderApp"
             android:fullBackupContent="@xml/backup_descriptor"
             android:icon="@mipmap/ic_beholder_launcher"

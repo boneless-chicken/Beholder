@@ -74,12 +74,6 @@ class LoginRepository(private val context: Context) {
                 override fun onResponse(call: Call<GetCharactersResponse>,
                                         response: Response<GetCharactersResponse>) {
                     if (response.isSuccessful) {
-                        AsyncTask.execute {
-                            response.body()?.characters?.forEach {
-                                upsertCharacter(it)
-                            }
-                        }
-
                         val userResponse = response.body()?.user
                         if (userResponse != null) {
                             userResponse.email = currentUser.email ?: ""
@@ -125,12 +119,5 @@ class LoginRepository(private val context: Context) {
                         }
                     }
             })
-    }
-
-    private fun upsertCharacter(character: Character) {
-        val id = characterDao.insert(character)
-        if (id == -1L) {
-            characterDao.update(character)
-        }
     }
 }

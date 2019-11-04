@@ -1,13 +1,12 @@
 package com.bonelesschicken.beholder.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class TemporaryHitPoints(
-    val id: Long,
-
+    @SerializedName("source")
     val source: String,
-
+    @SerializedName("point")
     val point: Int,
-
-    val duration: Int,
-
-    var primaryStatsId: String? = null
+    @SerializedName("duration")
+    val duration: Int
 )

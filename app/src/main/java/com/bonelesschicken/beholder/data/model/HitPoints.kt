@@ -1,7 +1,6 @@
 package com.bonelesschicken.beholder.data.model
 
 import androidx.room.ColumnInfo
-import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 
 class HitPoints {
@@ -13,7 +12,7 @@ class HitPoints {
     @ColumnInfo(name = "currentHitPoints")
     var currentHitPoints: Int = 0
 
-    @Ignore
     @SerializedName("temporaryHitPoints")
+    @ColumnInfo(name = "temporaryHitPoints")
     var temporaryHitPoints: List<TemporaryHitPoints> = ArrayList()
 }

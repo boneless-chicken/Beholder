@@ -38,7 +38,15 @@ class LoginRepository(private val context: Context) {
             auth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        auth.currentUser?.let { currentUser -> getUser(currentUser, viewModel) }
+                        auth.currentUser?.let { currentUser ->
+                            val user = User("",
+                                currentUser.uid,
+                                ArrayList(),
+                                currentUser.displayName ?: "",
+                                currentUser.email ?: "")
+                            PreferenceManager.saveSession(user, context)
+                            viewModel.value = LoginResult(user, null)
+                        }
                     } else {
                         viewModel.value = LoginResult(null, it.exception.toString())
                     }
@@ -62,33 +70,6 @@ class LoginRepository(private val context: Context) {
         } catch (e: Throwable) {
             viewModel.value = LoginResult(null, IOException("Error logging in", e).message)
         }
-    }
-
-    private fun getUser(currentUser: FirebaseUser, viewModel: MutableLiveData<LoginResult>) {
-        ApiClient().service.getCharacters(currentUser.uid)
-            .enqueue(object : Callback<GetCharactersResponse> {
-                override fun onFailure(call: Call<GetCharactersResponse>, t: Throwable) {
-                    viewModel.value = LoginResult(null, error = t.toString())
-                }
-
-                override fun onResponse(call: Call<GetCharactersResponse>,
-                                        response: Response<GetCharactersResponse>) {
-                    if (response.isSuccessful) {
-                        val userResponse = response.body()?.user
-                        if (userResponse != null) {
-                            userResponse.email = currentUser.email ?: ""
-                            userResponse.name = currentUser.displayName ?: ""
-                            PreferenceManager.saveSession(userResponse, context)
-                            viewModel.value = LoginResult(userResponse, null)
-                        } else {
-                            FirebaseAuth.getInstance().signOut()
-                            viewModel.value = LoginResult(null, "Null response")
-                        }
-                    } else {
-                        viewModel.value = LoginResult(null, "Not successful response")
-                    }
-                }
-            })
     }
 
     private fun createUser(currentUser: FirebaseUser, viewModel: MutableLiveData<LoginResult>) {

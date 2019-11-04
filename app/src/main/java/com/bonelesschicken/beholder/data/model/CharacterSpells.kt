@@ -10,8 +10,8 @@ data class CharacterSpells(
     @ColumnInfo(name = "characterSpells_id")
     var id: String = "",
 
-    @Ignore
     @SerializedName("spellSlots")
+    @ColumnInfo(name = "spellSlots")
     var spellSlots: List<SpellSlot> = ArrayList(),
 
     @SerializedName("concentration")
@@ -26,7 +26,13 @@ data class CharacterSpells(
     @ColumnInfo(name = "spellAttackBonus")
     var spellAttackBonus: Int = 0,
 
-    @Ignore
+    @SerializedName("maxSpellsPrepared")
+    @ColumnInfo(name = "maxSpellsPrepared")
+    var maxSpellsPrepared: String = "",
+
+    @SerializedName("spellsPrepared")
+    var spellsPrepared: List<String> = ArrayList(),
+
     @SerializedName("spellsKnown")
     var spellsKnown: List<String> = ArrayList()
 

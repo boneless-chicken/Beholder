@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bonelesschicken.beholder.R
-import com.bonelesschicken.beholder.data.model.Character
+import com.bonelesschicken.beholder.data.model.character.Character
 import com.bonelesschicken.beholder.ui.character.CharacterActivity
 import com.google.android.material.card.MaterialCardView
 

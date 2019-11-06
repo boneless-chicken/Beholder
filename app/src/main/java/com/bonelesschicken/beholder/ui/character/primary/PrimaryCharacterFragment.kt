@@ -1,4 +1,4 @@
-package com.bonelesschicken.beholder.ui.character
+package com.bonelesschicken.beholder.ui.character.primary
 
 
 import android.os.Bundle
@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bonelesschicken.beholder.R
+import com.bonelesschicken.beholder.ui.character.CharacterViewModel
+import com.bonelesschicken.beholder.ui.character.CharacterViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -71,7 +73,9 @@ class PrimaryCharacterFragment : Fragment() {
         super.onCreate(savedInstanceState)
         context?.let {
 
-            characterViewModel = ViewModelProvider(this, CharacterViewModelFactory(it))
+            characterViewModel = ViewModelProvider(this,
+                CharacterViewModelFactory(it)
+            )
                 .get(CharacterViewModel::class.java)
             characterViewModel.getCharacter(arguments!!.getString("KEY_CHARACTER_ID")!!)
                 .observe(this, Observer { character ->

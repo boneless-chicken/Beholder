@@ -1,6 +1,6 @@
 package com.bonelesschicken.beholder.network
 
-import com.bonelesschicken.beholder.data.model.Character
+import com.bonelesschicken.beholder.data.model.character.Character
 import com.bonelesschicken.beholder.network.responses.GameData
 import com.bonelesschicken.beholder.data.model.User
 import retrofit2.Call
@@ -12,7 +12,7 @@ import retrofit2.http.Path
 interface SpellbinderService {
 
     @GET("/GameData")
-    fun getGameData(@Path("uid") uid: String): Call<GameData>
+    fun getGameData(): Call<GameData>
 
     @POST("/User/Register")
     fun createUser(@Body user: User): Call<User>

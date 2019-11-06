@@ -1,4 +1,4 @@
-package com.bonelesschicken.beholder.ui.character
+package com.bonelesschicken.beholder.ui.character.inventory
 
 
 import android.os.Bundle

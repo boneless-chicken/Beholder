@@ -1,4 +1,4 @@
-package com.bonelesschicken.beholder.data.model
+package com.bonelesschicken.beholder.data.model.character
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded

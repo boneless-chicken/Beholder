@@ -5,7 +5,9 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import com.bonelesschicken.beholder.data.BeholderDatabase
 import com.bonelesschicken.beholder.data.daos.CharacterDao
-import com.bonelesschicken.beholder.data.model.Character
+import com.bonelesschicken.beholder.data.daos.SpellDao
+import com.bonelesschicken.beholder.data.model.character.Character
+import com.bonelesschicken.beholder.data.model.spells.Spell
 import com.bonelesschicken.beholder.network.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,9 +16,11 @@ import retrofit2.Response
 class CharacterRepository(context: Context, private val apiClient: ApiClient) {
     private var db : BeholderDatabase = BeholderDatabase.invoke(context)
     private var characterDao: CharacterDao
+    private var spellDao: SpellDao
 
     init {
         characterDao = db.characterDao()
+        spellDao = db.spellDao()
     }
 
     fun getCharacterList(uid: String): LiveData<List<Character>> {
@@ -50,5 +54,9 @@ class CharacterRepository(context: Context, private val apiClient: ApiClient) {
 
     fun getCharacter(characterId: String): LiveData<Character> {
         return characterDao.getById(characterId)
+    }
+
+    fun getSpell(id: String): Spell {
+        return spellDao.getByIdLocal(id)
     }
 }

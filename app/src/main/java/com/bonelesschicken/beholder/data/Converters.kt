@@ -2,6 +2,9 @@ package com.bonelesschicken.beholder.data
 
 import androidx.room.TypeConverter
 import com.bonelesschicken.beholder.data.model.TemporaryHitPoints
+import com.bonelesschicken.beholder.data.model.spells.ScalingDamage
+import com.bonelesschicken.beholder.data.model.spells.SpellComponent
+import com.bonelesschicken.beholder.data.model.spells.SpellComponents
 import com.bonelesschicken.beholder.data.model.spells.SpellSlot
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -49,6 +52,34 @@ object Converters {
     @JvmStatic
     fun stringsToString(list: List<String>): String {
         val type = object : TypeToken<List<String>>() {}.type
+        return gson.toJson(list, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun stringToSpellComponents(json: String): List<SpellComponent> {
+        val type = object : TypeToken<List<SpellComponent>>() {}.type
+        return gson.fromJson<List<SpellComponent>>(json, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun spellComponentsToString(list: List<SpellComponent>): String {
+        val type = object : TypeToken<List<SpellComponent>>() {}.type
+        return gson.toJson(list, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun stringToScalingDamage(json: String): List<ScalingDamage> {
+        val type = object : TypeToken<List<ScalingDamage>>() {}.type
+        return gson.fromJson<List<ScalingDamage>>(json, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun scalingDamageToString(list: List<ScalingDamage>): String {
+        val type = object : TypeToken<List<ScalingDamage>>() {}.type
         return gson.toJson(list, type)
     }
 }

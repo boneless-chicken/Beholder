@@ -6,15 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.bonelesschicken.beholder.data.daos.CharacterDao
-import com.bonelesschicken.beholder.data.model.Character
-import com.bonelesschicken.beholder.data.model.CharacterStats
-import com.bonelesschicken.beholder.data.model.TemporaryHitPoints
+import com.bonelesschicken.beholder.data.daos.SpellDao
+import com.bonelesschicken.beholder.data.model.character.Character
+import com.bonelesschicken.beholder.data.model.spells.Spell
 
 
-@Database(entities = [Character::class], version = 1)
+@Database(entities = [Character::class, Spell::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class BeholderDatabase : RoomDatabase() {
     abstract fun characterDao(): CharacterDao
+    abstract fun spellDao(): SpellDao
 
     companion object {
         @Volatile private var instance: BeholderDatabase? = null

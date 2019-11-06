@@ -2,7 +2,7 @@ package com.bonelesschicken.beholder.data.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.bonelesschicken.beholder.data.model.Character
+import com.bonelesschicken.beholder.data.model.character.Character
 
 @Dao
 interface CharacterDao {

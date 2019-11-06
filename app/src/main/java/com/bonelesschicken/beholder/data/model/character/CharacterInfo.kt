@@ -1,7 +1,8 @@
-package com.bonelesschicken.beholder.data.model
+package com.bonelesschicken.beholder.data.model.character
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
+import com.bonelesschicken.beholder.data.model.Alignment
 import com.google.gson.annotations.SerializedName
 
 data class CharacterInfo(

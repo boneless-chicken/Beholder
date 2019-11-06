@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.bonelesschicken.beholder.ui.character.inventory.InventoryCharacterFragment
+import com.bonelesschicken.beholder.ui.character.primary.PrimaryCharacterFragment
+import com.bonelesschicken.beholder.ui.character.spells.SpellsCharacterFragment
 
 class CharacterFragmentPagerAdapter(fragmentManager: FragmentManager, private val characterId: String) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

@@ -40,7 +40,7 @@ class CharacterActivity : BaseActivity() {
     private lateinit var mViewPagerAdapter: CharacterFragmentPagerAdapter
 
     private lateinit var mTextCharacterName: TextView
-    private lateinit var mTextCharacterRace: TextView
+    private lateinit var mTextCharacterClass: TextView
 
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var mBottomAppBar: BottomAppBar
@@ -72,7 +72,7 @@ class CharacterActivity : BaseActivity() {
 
 
         mTextCharacterName = findViewById(R.id.text_character_name)
-        mTextCharacterRace = findViewById(R.id.text_character_race)
+        mTextCharacterClass = findViewById(R.id.text_character_race)
 
         if (intent.hasExtra(CHARACTER_ID)) {
             mViewPager = findViewById(R.id.character_view_pager)
@@ -82,7 +82,7 @@ class CharacterActivity : BaseActivity() {
             characterViewModel.getCharacter(intent.getStringExtra(CHARACTER_ID))
                 .observe(this, Observer {
                     mTextCharacterName.text = it.characterInfo.name
-                    mTextCharacterRace.text = it.characterInfo.race
+                    mTextCharacterClass.text = it.characterInfo.className
                 })
         }
     }

@@ -46,7 +46,7 @@ class CharacterListAdapter(private val context: Context, private var mCharacterL
     inner class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mCardCharacter: MaterialCardView = itemView.findViewById(R.id.card_character_container)
         var mTextCharacterName: TextView = itemView.findViewById(R.id.text_character_name)
-        var mTextCharacterClass: TextView = itemView.findViewById(R.id.text_character_class)
+        var mTextCharacterClass: TextView = itemView.findViewById(R.id.text_character_race)
         var mTextCharacterLvl: TextView = itemView.findViewById(R.id.text_character_lvl)
     }
 }

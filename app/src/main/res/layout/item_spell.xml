@@ -14,51 +14,85 @@
             android:layout_marginStart="16dp"
             android:textColor="@color/colorTitle"
             android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_spell_type"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/chip_spell_type"
             tools:text="Spell Name" />
 
+    <com.google.android.material.chip.Chip
+            android:id="@+id/chip_spell_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Cantrip" />
+
     <include
-            android:id="@+id/card_spell_casting_time"
+            android:id="@+id/card_spell_card_1"
+            layout="@layout/item_generic_card"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/card_spell_card_2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_spell_type" />
+
+    <include
+            android:id="@+id/card_spell_card_2"
+            layout="@layout/item_generic_card"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/card_spell_card_3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/card_spell_card_1"
+            app:layout_constraintTop_toBottomOf="@+id/chip_spell_type" />
+
+    <include
+            android:id="@+id/card_spell_card_3"
+            layout="@layout/item_generic_card"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/card_spell_card_2"
+            app:layout_constraintTop_toBottomOf="@+id/chip_spell_type" />
+
+    <include
+            android:id="@+id/card_spell_card_4"
             layout="@layout/item_generic_card"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/card_spell_range_area"
+            app:layout_constraintEnd_toStartOf="@+id/card_spell_card_5"
             app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_spell_name" />
+            app:layout_constraintTop_toBottomOf="@+id/card_spell_card_1" />
 
     <include
-            android:id="@+id/card_spell_range_area"
+            android:id="@+id/card_spell_card_5"
             layout="@layout/item_generic_card"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/card_spell_components"
+            app:layout_constraintEnd_toStartOf="@+id/card_spell_card_6"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/card_spell_casting_time"
-            app:layout_constraintTop_toBottomOf="@+id/text_spell_name" />
+            app:layout_constraintStart_toEndOf="@+id/card_spell_card_4"
+            app:layout_constraintTop_toBottomOf="@+id/card_spell_card_2" />
 
     <include
-            android:id="@+id/card_spell_components"
-            layout="@layout/item_generic_card"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/card_spell_duration"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/card_spell_range_area"
-            app:layout_constraintTop_toBottomOf="@+id/text_spell_name" />
-
-    <include
-            android:id="@+id/card_spell_duration"
+            android:id="@+id/card_spell_card_6"
             layout="@layout/item_generic_card"
             android:layout_width="0dp"
             android:layout_height="100dp"
@@ -67,63 +101,11 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/card_spell_components"
-            app:layout_constraintTop_toBottomOf="@+id/text_spell_name" />
-
-    <include
-            android:id="@+id/card_spell_school"
-            layout="@layout/item_generic_card"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/card_spell_attack_save"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_spell_casting_time" />
-
-    <include
-            android:id="@+id/card_spell_attack_save"
-            layout="@layout/item_generic_card"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/card_spell_damage_effect"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/card_spell_school"
-            app:layout_constraintTop_toBottomOf="@+id/card_spell_range_area" />
-
-    <include
-            android:id="@+id/card_spell_damage_effect"
-            layout="@layout/item_generic_card"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/card_spell_extra"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/card_spell_attack_save"
-            app:layout_constraintTop_toBottomOf="@+id/card_spell_components" />
-
-    <include
-            android:id="@+id/card_spell_extra"
-            layout="@layout/item_generic_card"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/card_spell_damage_effect"
-            app:layout_constraintTop_toBottomOf="@+id/card_spell_duration" />
+            app:layout_constraintStart_toEndOf="@+id/card_spell_card_5"
+            app:layout_constraintTop_toBottomOf="@+id/card_spell_card_3" />
 
     <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView5"
+            android:id="@+id/label_spell_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -134,7 +116,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_spell_school" />
+            app:layout_constraintTop_toBottomOf="@+id/card_spell_card_5" />
 
     <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_spell_description"
@@ -146,11 +128,11 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView5"
+            app:layout_constraintTop_toBottomOf="@+id/label_spell_description"
             tools:text="A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn." />
 
     <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/materialTextView3"
+            android:id="@+id/label_spell_higher"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -171,9 +153,19 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_spell_show_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialTextView3"
+            app:layout_constraintTop_toBottomOf="@+id/label_spell_higher"
             tools:text=" When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd." />
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_spell_show_more"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Show more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,11 +45,13 @@ class MainActivity : BaseActivity() {
 
         mainViewModel = ViewModelProvider(this, MainViewModelFactory(this)).get(MainViewModel::class.java)
 
-        mainViewModel.getCharacters(mSessionManager.user!!.uid)
-            .observe(this@MainActivity, Observer {
-                val characterList = it ?: return@Observer
-                mAdapterCharacters.setData(characterList)
-            })
+        if (mSessionManager.user != null) {
+            mainViewModel.getCharacters(mSessionManager.user!!.uid)
+                .observe(this@MainActivity, Observer {
+                    val characterList = it ?: return@Observer
+                    mAdapterCharacters.setData(characterList)
+                })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -86,9 +88,9 @@ class MainActivity : BaseActivity() {
             .setTitle(getString(R.string.action_logout))
             .setMessage(getString(R.string.action_dialog_sure_to_logout))
             .setPositiveButton(android.R.string.yes) { _, _ ->
+                finish()
                 mSessionManager.logout()
                 startActivity(Intent(this, LoginActivity::class.java))
-                finish()
             }
             .setNegativeButton(android.R.string.no, null)
             .show()

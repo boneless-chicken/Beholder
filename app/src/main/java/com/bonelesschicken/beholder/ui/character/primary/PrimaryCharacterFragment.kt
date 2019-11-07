@@ -20,7 +20,7 @@ class PrimaryCharacterFragment : Fragment() {
 
     private lateinit var mTextCharacterAlignment: TextView
     private lateinit var mTextCharacterBackground: TextView
-    private lateinit var mTextCharacterClass: TextView
+    private lateinit var mTextCharacterRace: TextView
     private lateinit var mTextCharacterExp: TextView
     private lateinit var mTextCharacterLvl: TextView
     private lateinit var mTextCharacterHp: TextView
@@ -48,7 +48,7 @@ class PrimaryCharacterFragment : Fragment() {
         // Character main views
         mTextCharacterAlignment = view.findViewById(R.id.text_character_alignment)
         mTextCharacterBackground = view.findViewById(R.id.text_character_background)
-        mTextCharacterClass = view.findViewById(R.id.text_character_class)
+        mTextCharacterRace = view.findViewById(R.id.text_character_race)
         mTextCharacterExp = view.findViewById(R.id.text_character_exp)
         mTextCharacterLvl = view.findViewById(R.id.text_character_level)
         mTextCharacterHp = view.findViewById(R.id.text_character_hp)
@@ -83,7 +83,7 @@ class PrimaryCharacterFragment : Fragment() {
                     val alignment = character.characterInfo.alignment.attitude + " " + character.characterInfo.alignment.morality
                     mTextCharacterAlignment.text = alignment
                     mTextCharacterBackground.text = character.backgrounds
-                    mTextCharacterClass.text = character.characterInfo.className
+                    mTextCharacterRace.text = character.characterInfo.race
                     mTextCharacterExp.text = it.getString(R.string.nav_character_experience, character.characterInfo.experiencePoints.toString())
                     mTextCharacterLvl.text = it.getString(R.string.nav_character_level, character.characterInfo.level.toString())
 

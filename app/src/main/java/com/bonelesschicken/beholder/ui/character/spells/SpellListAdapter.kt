@@ -1,8 +1,7 @@
 package com.bonelesschicken.beholder.ui.character.spells
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,9 +55,13 @@ class SpellListAdapter (private val context: Context, private var mSpellList: Li
 
         holder.mChipSpellType.text = spellLevelText
         if (spell.spellType == "Cantrip") {
-            holder.mChipSpellType.chipBackgroundColor = ColorStateList.valueOf(Color.BLUE)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                holder.mChipSpellType.chipBackgroundColor = context.getColorStateList(R.color.colorAccentLight)
+            }
         } else {
-            holder.mChipSpellType.chipBackgroundColor = ColorStateList.valueOf(Color.RED)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                holder.mChipSpellType.chipBackgroundColor = context.getColorStateList(R.color.colorPrimaryLight)
+            }
         }
 
         holder.mButtonShowMore.setOnClickListener {

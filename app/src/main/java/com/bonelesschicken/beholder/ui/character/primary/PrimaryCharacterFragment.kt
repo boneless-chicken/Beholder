@@ -43,6 +43,11 @@ class PrimaryCharacterFragment : Fragment() {
     private lateinit var mRecyclerSpellSlots: RecyclerView
     private lateinit var mSpellsSlotsListAdapter: SpellSlotsListAdapter
 
+    private lateinit var mConcentrationView: View
+    private lateinit var mSpellcastingModifierView: View
+    private lateinit var mSpellAttackBonusView: View
+    private lateinit var mMaxSpellsPreparedView: View
+
     private lateinit var characterViewModel: CharacterViewModel
 
     override fun onCreateView(
@@ -80,6 +85,13 @@ class PrimaryCharacterFragment : Fragment() {
             mRecyclerSpellSlots.layoutManager = LinearLayoutManager(it)
             mRecyclerSpellSlots.adapter = mSpellsSlotsListAdapter
         }
+
+        // Spell stats
+        mConcentrationView = view.findViewById(R.id.card_character_spell_concentration)
+        mSpellcastingModifierView = view.findViewById(R.id.card_character_spell_casting)
+        mSpellAttackBonusView = view.findViewById(R.id.card_character_spell_attack)
+        mMaxSpellsPreparedView = view.findViewById(R.id.card_character_spell_max_prepared)
+
         return view
     }
 
@@ -111,7 +123,8 @@ class PrimaryCharacterFragment : Fragment() {
                     setPrimaryScoreViewValues(mInitiativeViewView,"Initiative",
                         character.characterStats.initiative
                     )
-                    setPrimaryScoreViewValues(mSpeedView,"Speed", character.characterStats.speed)
+                    setPrimaryScoreViewValues(mSpeedView,"Speed",
+                        character.characterStats.speed)
                     setPrimaryScoreViewValues(mProficiencyView,"Proficiency",
                         character.characterStats.proficiencyBonus
                     )
@@ -162,6 +175,20 @@ class PrimaryCharacterFragment : Fragment() {
                     //region spell slots vies
                     mSpellsSlotsListAdapter.setData(character.characterSpells.spellSlots)
                     //endregion
+                    //region spell views
+                    setPrimaryScoreViewValues(mConcentrationView,"Concentration",
+                        character.characterSpells.concentration
+                    )
+                    setPrimaryScoreViewValues(mSpellcastingModifierView,"Spell mod.",
+                        character.characterSpells.spellcastingModifier
+                    )
+                    setPrimaryScoreViewValues(mSpellAttackBonusView,"Spell attack bonus",
+                        character.characterSpells.spellAttackBonus
+                    )
+                    setPrimaryScoreViewValues(mMaxSpellsPreparedView,"Max. spells",
+                        character.characterSpells.maxSpellsPrepared
+                    )
+                    //endregion
                 })
         }
     }
@@ -169,6 +196,11 @@ class PrimaryCharacterFragment : Fragment() {
     private fun setPrimaryScoreViewValues(scoreView: View, scoreName: String, scoreValue: Int?) {
         scoreView.findViewById<TextView>(R.id.text_generic_card_title).text = scoreName
         scoreView.findViewById<TextView>(R.id.text_generic_card_value).text = scoreValue.toString()
+    }
+
+    private fun setPrimaryScoreViewValues(scoreView: View, scoreName: String, scoreValue: String) {
+        scoreView.findViewById<TextView>(R.id.text_generic_card_title).text = scoreName
+        scoreView.findViewById<TextView>(R.id.text_generic_card_value).text = scoreValue
     }
 
     private fun setAbilityViewValues(abilityView: View, abilityName: String, abilityScore: Int?, abilityModifier: Int?, abilitySave: Int?) {

@@ -6,7 +6,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="8dp">
 
     <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_spell_slot_level"

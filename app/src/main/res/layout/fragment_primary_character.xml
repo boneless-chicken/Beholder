@@ -263,18 +263,40 @@
                     app:layout_constraintStart_toEndOf="@+id/card_character_wisdom"
                     app:layout_constraintTop_toBottomOf="@+id/card_character_constitution" />
 
-            <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:visibility="invisible"
+                    android:background="@color/background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:tag="sticky"
+                    android:text="Spell slots"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card_character_wisdom"
-                    app:srcCompat="@drawable/beholder_1" />
+                    app:layout_constraintTop_toBottomOf="@+id/card_character_intelligence" />
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView3">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_character_spell_slots"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingTop="16dp"/>
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,9 +9,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bonelesschicken.beholder.R
 import com.bonelesschicken.beholder.ui.character.CharacterViewModel
 import com.bonelesschicken.beholder.ui.character.CharacterViewModelFactory
+import com.bonelesschicken.beholder.ui.character.spells.SpellListAdapter
 
 /**
  * A simple [Fragment] subclass.
@@ -36,6 +39,9 @@ class PrimaryCharacterFragment : Fragment() {
     private lateinit var mIntelligenceView: View
     private lateinit var mWisdomView: View
     private lateinit var mCharismaView: View
+
+    private lateinit var mRecyclerSpellSlots: RecyclerView
+    private lateinit var mSpellsSlotsListAdapter: SpellSlotsListAdapter
 
     private lateinit var characterViewModel: CharacterViewModel
 
@@ -66,6 +72,14 @@ class PrimaryCharacterFragment : Fragment() {
         mIntelligenceView = view.findViewById(R.id.card_character_intelligence)
         mWisdomView = view.findViewById(R.id.card_character_wisdom)
         mCharismaView = view.findViewById(R.id.card_character_charisma)
+
+        // Spell slots
+        mRecyclerSpellSlots = view.findViewById(R.id.recycler_character_spell_slots)
+        context?.let {
+            mSpellsSlotsListAdapter = SpellSlotsListAdapter(it, ArrayList())
+            mRecyclerSpellSlots.layoutManager = LinearLayoutManager(it)
+            mRecyclerSpellSlots.adapter = mSpellsSlotsListAdapter
+        }
         return view
     }
 
@@ -144,6 +158,9 @@ class PrimaryCharacterFragment : Fragment() {
                         character.characterStats.abilities.charisma.abilityModifier,
                         character.characterStats.abilities.charisma.passiveCheck
                     )
+                    //endregion
+                    //region spell slots vies
+                    mSpellsSlotsListAdapter.setData(character.characterSpells.spellSlots)
                     //endregion
                 })
         }

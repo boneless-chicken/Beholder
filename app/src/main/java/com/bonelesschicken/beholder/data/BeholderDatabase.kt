@@ -5,8 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.bonelesschicken.beholder.data.daos.ArmorDao
 import com.bonelesschicken.beholder.data.daos.CharacterDao
 import com.bonelesschicken.beholder.data.daos.SpellDao
+import com.bonelesschicken.beholder.data.daos.WeaponDao
 import com.bonelesschicken.beholder.data.model.character.Character
 import com.bonelesschicken.beholder.data.model.equipment.Armor
 import com.bonelesschicken.beholder.data.model.equipment.Weapon
@@ -18,6 +20,8 @@ import com.bonelesschicken.beholder.data.model.spells.Spell
 abstract class BeholderDatabase : RoomDatabase() {
     abstract fun characterDao(): CharacterDao
     abstract fun spellDao(): SpellDao
+    abstract fun armorDao(): ArmorDao
+    abstract fun weaponDao(): WeaponDao
 
     companion object {
         @Volatile private var instance: BeholderDatabase? = null

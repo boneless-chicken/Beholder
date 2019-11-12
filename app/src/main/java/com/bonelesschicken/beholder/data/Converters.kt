@@ -1,6 +1,7 @@
 package com.bonelesschicken.beholder.data
 
 import androidx.room.TypeConverter
+import com.bonelesschicken.beholder.data.model.Cost
 import com.bonelesschicken.beholder.data.model.TemporaryHitPoints
 import com.bonelesschicken.beholder.data.model.spells.ScalingDamage
 import com.bonelesschicken.beholder.data.model.spells.SpellComponent
@@ -80,6 +81,20 @@ object Converters {
     @JvmStatic
     fun scalingDamageToString(list: List<ScalingDamage>): String {
         val type = object : TypeToken<List<ScalingDamage>>() {}.type
+        return gson.toJson(list, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun stringToCost(json: String): List<Cost> {
+        val type = object : TypeToken<List<Cost>>() {}.type
+        return gson.fromJson<List<Cost>>(json, type)
+    }
+
+    @TypeConverter
+    @JvmStatic
+    fun costToString(list: List<Cost>): String {
+        val type = object : TypeToken<List<Cost>>() {}.type
         return gson.toJson(list, type)
     }
 }

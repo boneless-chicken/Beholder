@@ -11,5 +11,3 @@ class BeholderApp: Application() {
         Stetho.initializeWithDefaults(this)
     }
 }
-
-// hacer select a la base de datos para obtener los detalles de un personaje :3

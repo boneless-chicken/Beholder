@@ -66,11 +66,13 @@ class SpellListAdapter (private val context: Context, private var mSpellList: Li
 
         holder.mButtonShowMore.setOnClickListener {
             if (holder.mTextSpellHigher.visibility == View.VISIBLE) {
+                holder.mButtonShowMore.text = "Show More"
                 holder.mLabelSpellDescription.visibility = View.GONE
                 holder.mLabelSpellHigher.visibility = View.GONE
                 holder.mTextSpellDescription.visibility = View.GONE
                 holder.mTextSpellHigher.visibility = View.GONE
             } else {
+                holder.mButtonShowMore.text = "Show Less"
                 holder.mLabelSpellDescription.visibility = View.VISIBLE
                 holder.mLabelSpellHigher.visibility = View.VISIBLE
                 holder.mTextSpellDescription.visibility = View.VISIBLE

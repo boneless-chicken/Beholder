@@ -74,13 +74,15 @@
             app:fabCradleMargin="5dp"
             app:hideOnScroll="true"
             app:backgroundTint="@color/colorPrimary"
+            app:tint="@android:color/black"
             app:navigationIcon="@drawable/ic_menu"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_button_character"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_looks_6"
+            android:src="@drawable/ic_d20"
+            app:borderWidth="0dp"
             app:backgroundTint="@color/colorAccent"
             app:layout_anchor="@id/bottom_bar_character"
             app:shapeAppearanceOverlay="@style/FloatingActionButton.Shape.Dice"/>

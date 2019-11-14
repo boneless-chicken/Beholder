@@ -37,4 +37,9 @@ data class Character(
 
     @ColumnInfo(name = "backgrounds")
     @SerializedName("backgrounds")
-    val backgrounds: String)
+    val backgrounds: String,
+
+    @Embedded
+    @SerializedName("characterEquipment")
+    val characterEquipment: CharacterEquipment
+)

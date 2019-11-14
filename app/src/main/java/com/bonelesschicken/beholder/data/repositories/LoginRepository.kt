@@ -4,8 +4,10 @@ import android.content.Context
 import android.os.AsyncTask
 import androidx.lifecycle.MutableLiveData
 import com.bonelesschicken.beholder.data.BeholderDatabase
+import com.bonelesschicken.beholder.data.daos.ArmorDao
 import com.bonelesschicken.beholder.data.daos.CharacterDao
 import com.bonelesschicken.beholder.data.daos.SpellDao
+import com.bonelesschicken.beholder.data.daos.WeaponDao
 import com.bonelesschicken.beholder.data.model.User
 import com.bonelesschicken.beholder.network.ApiClient
 import com.bonelesschicken.beholder.network.responses.GameData
@@ -27,10 +29,14 @@ class LoginRepository(private val context: Context) {
     private var db : BeholderDatabase = BeholderDatabase.invoke(context)
     private var characterDao: CharacterDao
     private var spellDao: SpellDao
+    private var armorDao: ArmorDao
+    private var weaponDao: WeaponDao
 
     init {
         characterDao = db.characterDao()
         spellDao = db.spellDao()
+        armorDao = db.armorDao()
+        weaponDao = db.weaponDao()
     }
 
 
@@ -69,6 +75,16 @@ class LoginRepository(private val context: Context) {
                         AsyncTask.execute {
                             response.body()!!.spells.forEach {
                                 spellDao.insert(it)
+                            }
+                        }
+                        AsyncTask.execute {
+                            response.body()!!.weapons.forEach {
+                                weaponDao.insert(it)
+                            }
+                        }
+                        AsyncTask.execute {
+                            response.body()!!.armors.forEach {
+                                armorDao.insert(it)
                             }
                         }
                         PreferenceManager.saveSession(user, context)

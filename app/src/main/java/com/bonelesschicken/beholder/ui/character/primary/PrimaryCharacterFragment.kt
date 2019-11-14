@@ -40,13 +40,16 @@ class PrimaryCharacterFragment : Fragment() {
     private lateinit var mWisdomView: View
     private lateinit var mCharismaView: View
 
-    private lateinit var mRecyclerSpellSlots: RecyclerView
-    private lateinit var mSpellsSlotsListAdapter: SpellSlotsListAdapter
-
     private lateinit var mConcentrationView: View
     private lateinit var mSpellcastingModifierView: View
     private lateinit var mSpellAttackBonusView: View
     private lateinit var mMaxSpellsPreparedView: View
+
+    private lateinit var mRecyclerSpellSlots: RecyclerView
+    private lateinit var mSpellsSlotsListAdapter: SpellSlotsListAdapter
+
+    private lateinit var mRecyclerArmorProficiencies: RecyclerView
+    private lateinit var mArmorProficienciesListAdapter: ArmorProficienciesListAdapter
 
     private lateinit var characterViewModel: CharacterViewModel
 
@@ -78,6 +81,12 @@ class PrimaryCharacterFragment : Fragment() {
         mWisdomView = view.findViewById(R.id.card_character_wisdom)
         mCharismaView = view.findViewById(R.id.card_character_charisma)
 
+        // Spell stats
+        mConcentrationView = view.findViewById(R.id.card_character_spell_concentration)
+        mSpellcastingModifierView = view.findViewById(R.id.card_character_spell_casting)
+        mSpellAttackBonusView = view.findViewById(R.id.card_character_spell_attack)
+        mMaxSpellsPreparedView = view.findViewById(R.id.card_character_spell_max_prepared)
+
         // Spell slots
         mRecyclerSpellSlots = view.findViewById(R.id.recycler_character_spell_slots)
         context?.let {
@@ -86,11 +95,13 @@ class PrimaryCharacterFragment : Fragment() {
             mRecyclerSpellSlots.adapter = mSpellsSlotsListAdapter
         }
 
-        // Spell stats
-        mConcentrationView = view.findViewById(R.id.card_character_spell_concentration)
-        mSpellcastingModifierView = view.findViewById(R.id.card_character_spell_casting)
-        mSpellAttackBonusView = view.findViewById(R.id.card_character_spell_attack)
-        mMaxSpellsPreparedView = view.findViewById(R.id.card_character_spell_max_prepared)
+        // Armor proficiencies
+        mRecyclerArmorProficiencies = view.findViewById(R.id.recycler_armor_proficiencies)
+        context?.let {
+            mArmorProficienciesListAdapter = ArmorProficienciesListAdapter(it, ArrayList())
+            mRecyclerArmorProficiencies.layoutManager = LinearLayoutManager(it)
+            mRecyclerArmorProficiencies.adapter = mArmorProficienciesListAdapter
+        }
 
         return view
     }
@@ -98,11 +109,9 @@ class PrimaryCharacterFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context?.let {
-
             characterViewModel = ViewModelProvider(this,
                 CharacterViewModelFactory(it)
-            )
-                .get(CharacterViewModel::class.java)
+            ).get(CharacterViewModel::class.java)
             characterViewModel.getCharacter(arguments!!.getString("KEY_CHARACTER_ID")!!)
                 .observe(this, Observer { character ->
                     // Main views
@@ -172,9 +181,6 @@ class PrimaryCharacterFragment : Fragment() {
                         character.characterStats.abilities.charisma.passiveCheck
                     )
                     //endregion
-                    //region spell slots vies
-                    mSpellsSlotsListAdapter.setData(character.characterSpells.spellSlots)
-                    //endregion
                     //region spell views
                     setPrimaryScoreViewValues(mConcentrationView,"Concentration",
                         character.characterSpells.concentration
@@ -188,6 +194,12 @@ class PrimaryCharacterFragment : Fragment() {
                     setPrimaryScoreViewValues(mMaxSpellsPreparedView,"Max. spells",
                         character.characterSpells.maxSpellsPrepared
                     )
+                    //endregion
+                    //region spell slots vies
+                    mSpellsSlotsListAdapter.setData(character.characterSpells.spellSlots)
+                    //endregion
+                    //region armor proficiencies
+                    mArmorProficienciesListAdapter.setData(character.characterEquipment.armorProficiencies)
                     //endregion
                 })
         }

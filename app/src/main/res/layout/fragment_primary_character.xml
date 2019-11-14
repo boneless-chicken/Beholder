@@ -281,102 +281,132 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/card_character_intelligence" />
 
+            <include
+                    android:id="@+id/card_character_spell_concentration"
+                    layout="@layout/item_generic_card"
+                    android:layout_width="92dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@+id/card_character_spell_casting"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
+
+            <include
+                    android:id="@+id/card_character_spell_casting"
+                    layout="@layout/item_generic_card"
+                    android:layout_width="93dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@+id/card_character_spell_attack"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/card_character_spell_concentration"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
+
+            <include
+                    android:id="@+id/card_character_spell_attack"
+                    layout="@layout/item_generic_card"
+                    android:layout_width="93dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@+id/card_character_spell_max_prepared"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/card_character_spell_casting"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
+
+            <include
+                    android:id="@+id/card_character_spell_max_prepared"
+                    layout="@layout/item_generic_card"
+                    android:layout_width="97dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/card_character_spell_attack"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView3" />
+
+            <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:tag="sticky"
+                    android:text="Spell slots"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_character_spell_concentration" />
+
             <com.google.android.material.card.MaterialCardView
                     android:id="@+id/materialCardView_spell_slots"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    app:contentPaddingBottom="8dp"
+                    app:contentPaddingTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView3">
+                    app:layout_constraintTop_toBottomOf="@+id/textView">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_character_spell_slots"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                    <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="16dp"
-                            android:text="Spell slots"
-                            android:textColor="@color/colorTitle"
-                            android:textSize="18sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recycler_character_spell_slots"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="8dp"
-                            android:paddingBottom="8dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_spell_slot" />
             </com.google.android.material.card.MaterialCardView>
 
-            <include
-                    android:id="@+id/card_character_spell_concentration"
-                    layout="@layout/item_generic_card"
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView5"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/card_character_spell_casting"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    android:background="@color/background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:tag="sticky"
+                    android:text="Armor proficiencies"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/materialCardView_spell_slots" />
 
-            <include
-                    android:id="@+id/card_character_spell_casting"
-                    layout="@layout/item_generic_card"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/card_character_spell_attack"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/card_character_spell_concentration"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView_spell_slots" />
-
-            <include
-                    android:id="@+id/card_character_spell_attack"
-                    layout="@layout/item_generic_card"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/card_character_spell_max_prepared"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/card_character_spell_casting"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView_spell_slots" />
-
-            <include
-                    android:id="@+id/card_character_spell_max_prepared"
-                    layout="@layout/item_generic_card"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="8dp"
+            <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
+                    app:contentPaddingBottom="8dp"
+                    app:contentPaddingTop="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/card_character_spell_attack"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView_spell_slots" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView5">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_armor_proficiencies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_armor_proficiency" />
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

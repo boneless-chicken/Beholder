@@ -1,54 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_character_container"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/card_character_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:contentPadding="16dp"
-        app:cardCornerRadius="10dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:contentPadding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <TextView
+                android:id="@+id/text_character_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_character_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Player Name"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/text_character_lvl"
-                android:layout_marginEnd="8dp"
-                android:textSize="18sp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Player Name" />
+
         <TextView
+                android:id="@+id/text_character_race"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_character_race"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/text_character_name"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="Player Class"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/text_character_lvl"
-                android:layout_marginEnd="8dp"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_character_name"
+                tools:text="Player Class" />
+
         <TextView
+                android:id="@+id/text_character_lvl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_character_lvl"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                tools:text="lvl 1"/>
+                tools:text="lvl 1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

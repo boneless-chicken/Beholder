@@ -199,7 +199,11 @@ class PrimaryCharacterFragment : Fragment() {
                     mSpellsSlotsListAdapter.setData(character.characterSpells.spellSlots)
                     //endregion
                     //region armor proficiencies
-                    mArmorProficienciesListAdapter.setData(character.characterEquipment.armorProficiencies)
+                    val proficienciesList = arrayListOf(character.characterEquipment.weaponProficiency + " weapons")
+                    character.characterEquipment.armorProficiencies.forEach { string ->
+                        proficienciesList.add("$string armors")
+                    }
+                    mArmorProficienciesListAdapter.setData(proficienciesList)
                     //endregion
                 })
         }

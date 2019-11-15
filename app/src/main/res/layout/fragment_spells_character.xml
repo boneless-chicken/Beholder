@@ -4,6 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingTop="8dp"
         tools:context=".ui.character.spells.SpellsCharacterFragment">
     <com.bonelesschicken.beholder.utils.StickyNestedScrollView
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -12,8 +13,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="16dp">
+                android:layout_height="match_parent">
 
             <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/materialTextView"

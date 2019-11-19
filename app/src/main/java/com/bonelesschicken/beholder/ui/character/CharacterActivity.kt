@@ -50,6 +50,7 @@ class CharacterActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        postponeEnterTransition()
         setContentView(R.layout.activity_character)
         setupBottomAppBar()
 
@@ -83,6 +84,7 @@ class CharacterActivity : BaseActivity() {
                 .observe(this, Observer {
                     mTextCharacterName.text = it.characterInfo.name
                     mTextCharacterClass.text = it.characterInfo.className
+                    startPostponedEnterTransition()
                 })
         }
     }
@@ -92,6 +94,7 @@ class CharacterActivity : BaseActivity() {
             mDrawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
+            //supportFinishAfterTransition()
         }
     }
 
@@ -115,9 +118,6 @@ class CharacterActivity : BaseActivity() {
     override fun updateUI(currentUser: User?) {
         if (currentUser != null) {
             mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_name).text = currentUser.email
-            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_class).text = currentUser.name
-            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_level).text = ""
-            mNavigationHeader.findViewById<TextView>(R.id.text_nav_character_xp).text = ""
         }
     }
 

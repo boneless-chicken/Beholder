@@ -1,18 +1,22 @@
 package com.bonelesschicken.beholder.ui.main
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.util.Pair
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bonelesschicken.beholder.R
 import com.bonelesschicken.beholder.data.model.character.Character
 import com.bonelesschicken.beholder.ui.character.CharacterActivity
 import com.google.android.material.card.MaterialCardView
 
-class CharacterListAdapter(private val context: Context, private var mCharacterList: List<Character>?)
+
+class CharacterListAdapter(private val context: Context, private var mCharacterList: List<Character>?, private val activity: Activity)
     : RecyclerView.Adapter<CharacterListAdapter.CharacterViewHolder>() {
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -30,6 +34,12 @@ class CharacterListAdapter(private val context: Context, private var mCharacterL
         holder.mCardCharacter.setOnClickListener {
             val intent = Intent(context, CharacterActivity::class.java)
             intent.putExtra(CharacterActivity.CHARACTER_ID, character.id)
+
+            /*val p1: Pair<View, String> = Pair((holder.mTextCharacterName as View?)!!, "character_name")
+            val p2: Pair<View, String> = Pair((holder.mTextCharacterClass as View?)!!, "character_class")
+            val options: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, p1, p2)
+            context.startActivity(intent, options.toBundle())*/
             context.startActivity(intent)
         }
     }

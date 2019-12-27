@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_armor_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/colorTitle"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/chip_armor_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/chip_armor_type"
+            tools:text="Weapon's name" />
+
+    <com.google.android.material.chip.Chip
+            android:id="@+id/chip_armor_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Cantrip" />
+
+    <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/label_armor_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Description"
+            android:textColor="@color/colorTitle"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_armor_type" />
+
+    <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_armor_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_armor_description"
+            tools:text="Padded armor consists of quilted layers of cloth and batting." />
+
+    <include
+            android:id="@+id/card_armor_card_1"
+            layout="@layout/item_generic_card"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_armor_card_4"
+            app:layout_constraintEnd_toStartOf="@+id/card_armor_card_2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_armor_card_4" />
+
+    <include
+            android:id="@+id/card_armor_card_2"
+            layout="@layout/item_generic_card"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_armor_card_4"
+            app:layout_constraintEnd_toStartOf="@+id/card_armor_card_3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/card_armor_card_1"
+            app:layout_constraintTop_toTopOf="@+id/card_armor_card_4" />
+
+    <include
+            android:id="@+id/card_armor_card_3"
+            layout="@layout/item_generic_card"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_armor_card_4"
+            app:layout_constraintEnd_toStartOf="@+id/card_armor_card_4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/card_armor_card_2"
+            app:layout_constraintTop_toTopOf="@+id/card_armor_card_4" />
+
+    <include
+            android:id="@+id/card_armor_card_4"
+            layout="@layout/item_generic_card"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/card_armor_card_3"
+            app:layout_constraintTop_toBottomOf="@+id/text_armor_description" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/view4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

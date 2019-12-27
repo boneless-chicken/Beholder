@@ -3,13 +3,74 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:paddingTop="8dp"
         tools:context=".ui.character.inventory.InventoryCharacterFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.bonelesschicken.beholder.utils.StickyNestedScrollView
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Inventory fragment" />
+            android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:tag="sticky"
+                    android:text="Weapons"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_weapons_prepared"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_weapon"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/materialTextView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/background"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:tag="sticky"
+                    android:text="Armors"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler_weapons_prepared" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_armors_prepared"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingBottom="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/materialTextView2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.bonelesschicken.beholder.utils.StickyNestedScrollView>
 
 </FrameLayout>

@@ -25,7 +25,7 @@ class WeaponListAdapter (val context: Context, private var mWeaponsList: List<We
         holder.mTextWeaponName.text = weapon.name
         val description = "${weapon.description}\n${weapon.properties}"
         holder.mTextWeaponDescription.text = description
-        val damage = "Damage with ${weapon.damage.diceRoll} d${weapon.damage.diceValue}"
+        val damage = "Damage with ${weapon.damage.diceRolls}d${weapon.damage.diceValue}"
         holder.mTextWeaponProperties.text = damage
         setPrimaryScoreViewValues(holder.mWeaponCard1, "D. Type", weapon.damageType)
         setPrimaryScoreViewValues(holder.mWeaponCard2, "Weight", weapon.weight.toString())

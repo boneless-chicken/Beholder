@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo
 import com.google.gson.annotations.SerializedName
 
 data class HitDice(
-    @SerializedName("diceRoll")
-    @ColumnInfo(name = "diceRoll")
-    val diceRoll: Int,
+    @SerializedName("diceRolls")
+    @ColumnInfo(name = "diceRolls")
+    val diceRolls: Int,
 
     @SerializedName("diceValue")
     @ColumnInfo(name = "diceValue")
